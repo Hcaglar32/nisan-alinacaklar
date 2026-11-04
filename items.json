@@ -1,0 +1,618 @@
+[
+  {
+    "id": "c-1",
+    "name": "Dikey Şarjlı Süpürge",
+    "store": "Shark",
+    "category": "Elektronik",
+    "inDowry": true,
+    "updatedAt": 1730760000000
+  },
+  {
+    "id": "c-2",
+    "name": "Çelik Tencere Seti",
+    "store": "Emsan",
+    "category": "Mutfak",
+    "inDowry": true,
+    "updatedAt": 1730759000000
+  },
+  {
+    "id": "c-3",
+    "name": "Granit Tencere Seti",
+    "store": "Emsan",
+    "category": "Mutfak",
+    "inDowry": true,
+    "updatedAt": 1730758000000
+  },
+  {
+    "id": "c-4",
+    "name": "Düdüklü Tencere",
+    "store": "Emsan",
+    "category": "Mutfak",
+    "inDowry": true,
+    "updatedAt": 1730757000000
+  },
+  {
+    "id": "c-5",
+    "name": "Kahve Makinesi",
+    "store": "Ninja",
+    "category": "Elektronik",
+    "inDowry": true,
+    "updatedAt": 1730756000000
+  },
+  {
+    "id": "c-6",
+    "name": "Misafir Çatal Kaşık Bıçak Seti (84 Parça)",
+    "store": "Emsan",
+    "category": "Mutfak",
+    "inDowry": true,
+    "updatedAt": 1730755000000
+  },
+  {
+    "id": "c-7",
+    "name": "Misafir Yemek Takımı (12 Kişilik)",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": true,
+    "updatedAt": 1730754000000
+  },
+  {
+    "id": "c-8",
+    "name": "Bornoz Seti (Aile Bornoz Takımı)",
+    "store": "English Home",
+    "category": "Banyo",
+    "inDowry": true,
+    "updatedAt": 1730753000000
+  },
+  {
+    "id": "c-9",
+    "name": "Nevresim Takımı (Çift Kişilik)",
+    "store": "Yerel Firma",
+    "category": "Tekstil",
+    "inDowry": true,
+    "updatedAt": 1730752000000
+  },
+  {
+    "id": "a-1",
+    "name": "Günlük Yemek Takımı (6 Kişilik)",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730751000000
+  },
+  {
+    "id": "a-2",
+    "name": "Günlük Çatal Kaşık Bıçak Takımı",
+    "store": "Emsan",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730750000000
+  },
+  {
+    "id": "a-3",
+    "name": "Kahvaltı Takımı (6 Kişilik)",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730749000000
+  },
+  {
+    "id": "a-4",
+    "name": "Şef & Mutfak Bıçak Seti (Standlı)",
+    "store": "Zwilling / Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730748000000
+  },
+  {
+    "id": "a-5",
+    "name": "Ahşap / Bambu Kesme Tahtası Seti",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730747000000
+  },
+  {
+    "id": "a-6",
+    "name": "Çay Bardağı, Çay Tabağı ve Çay Kaşığı Seti",
+    "store": "Paşabahçe",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730746000000
+  },
+  {
+    "id": "a-7",
+    "name": "Su & Meşrubat Kadehi / Bardak Seti",
+    "store": "Paşabahçe",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730745000000
+  },
+  {
+    "id": "a-8",
+    "name": "Kahve Yanı Su Bardakları",
+    "store": "Paşabahçe",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730744000000
+  },
+  {
+    "id": "a-9",
+    "name": "Baharatlık & Yağdanlık / Sirkelik Seti",
+    "store": "Trendyol",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730743000000
+  },
+  {
+    "id": "a-10",
+    "name": "Çelik Çaydanlık Takımı",
+    "store": "Emsan",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730742000000
+  },
+  {
+    "id": "a-11",
+    "name": "Kek & Tart Kalıbı Seti",
+    "store": "Tefal",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730741000000
+  },
+  {
+    "id": "a-12",
+    "name": "Borcam & Fırın Kabı Seti",
+    "store": "Paşabahçe",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730740000000
+  },
+  {
+    "id": "a-13",
+    "name": "Silikon & Ahşap Yemek Pişirme Kaşık Seti",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730739000000
+  },
+  {
+    "id": "a-14",
+    "name": "Süzgeç, Rende ve Çırpıcı Seti",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730738000000
+  },
+  {
+    "id": "a-15",
+    "name": "Ekmek Kutusu & Kaşıklık Çekmece Düzenleyici",
+    "store": "Trendyol",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730737000000
+  },
+  {
+    "id": "a-16",
+    "name": "Saklama Kapları (Cam Vakumlu Set)",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730736000000
+  },
+  {
+    "id": "a-17",
+    "name": "Buharlı Ütü / Kazanlı Ütü",
+    "store": "Philips",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730735000000
+  },
+  {
+    "id": "a-18",
+    "name": "El Blender & Mikser Seti",
+    "store": "Braun / Karaca",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730734000000
+  },
+  {
+    "id": "a-19",
+    "name": "Tost Makinesi",
+    "store": "Tefal / Karaca",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730733000000
+  },
+  {
+    "id": "a-20",
+    "name": "Elektrikli Su Isıtıcı (Kettle)",
+    "store": "Karaca",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730732000000
+  },
+  {
+    "id": "a-21",
+    "name": "Günlük Nevresim Takımı (Yedek 2 Adet)",
+    "store": "Madame Coco",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730731000000
+  },
+  {
+    "id": "a-22",
+    "name": "Yatak Örtüsü & Pike Takımı",
+    "store": "English Home",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730730000000
+  },
+  {
+    "id": "a-23",
+    "name": "Yorgan (Çift Kişilik Mikrofiber / Yün)",
+    "store": "Yataş",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730729000000
+  },
+  {
+    "id": "a-24",
+    "name": "Yastık Seti (4 Adet)",
+    "store": "Yataş",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730728000000
+  },
+  {
+    "id": "a-25",
+    "name": "Sıvı Geçirmez Yatak Alezi & Yastık Alezi",
+    "store": "Madame Coco",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730727000000
+  },
+  {
+    "id": "a-26",
+    "name": "El & Yüz Havlu Seti (6'lı)",
+    "store": "Madame Coco",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730726000000
+  },
+  {
+    "id": "a-27",
+    "name": "Ayak Havlusu & Banyo Paspas Takımı (2'li)",
+    "store": "English Home",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730725000000
+  },
+  {
+    "id": "a-28",
+    "name": "Banyo Çöp Kovası & Fırça Seti",
+    "store": "IKEA",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730724000000
+  },
+  {
+    "id": "a-29",
+    "name": "Çamaşır Kurutmalık & Ütü Masası",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730723000000
+  },
+  {
+    "id": "a-30",
+    "name": "Kirli Çamaşır Sepeti & Mandallık",
+    "store": "IKEA",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730722000000
+  },
+  {
+    "id": "a-31",
+    "name": "Servis & Kepçe Takımı (Çelik / Servis Maşası, Kepçe, Kevgir, Spatula)",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730721000000
+  },
+  {
+    "id": "a-32",
+    "name": "Sarımsak Ezici, Ceviz Kıracağı ve Konserve Açacağı Seti",
+    "store": "Trendyol",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730720000000
+  },
+  {
+    "id": "a-33",
+    "name": "Salata Kurutucu & Karıştırma / Çırpma Kapları (Kaydırmaz Tabanlı)",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730719000000
+  },
+  {
+    "id": "a-34",
+    "name": "Nihale Seti (Sıcak Tencere Altlığı - Ahşap/Silikon)",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730718000000
+  },
+  {
+    "id": "a-35",
+    "name": "Fırın Eldiveni, Tutacak ve Mutfak Önlüğü Seti",
+    "store": "English Home",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730717000000
+  },
+  {
+    "id": "a-36",
+    "name": "Mutfak Kurulama Bezleri & Mikrofiber Mutfak Havluları (6'lı)",
+    "store": "Madame Coco",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730716000000
+  },
+  {
+    "id": "a-37",
+    "name": "Sürahi & Başucu Karafı Seti",
+    "store": "Paşabahçe",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730715000000
+  },
+  {
+    "id": "a-38",
+    "name": "Fincan Takımı (6 Kişilik Türk Kahvesi & 6 Kişilik Nescafe Fincanı)",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730714000000
+  },
+  {
+    "id": "a-39",
+    "name": "Servis & Sunum Tabakları (Kayık Tabak, Salata Kasesi, Çerezlik / Sosluk Seti)",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730713000000
+  },
+  {
+    "id": "a-40",
+    "name": "Döner Pasta Standı & Spatulası",
+    "store": "Karaca",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730712000000
+  },
+  {
+    "id": "a-41",
+    "name": "Narenciye Sıkacağı (Limon / Portakal Sıkacağı)",
+    "store": "Trendyol",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730711000000
+  },
+  {
+    "id": "a-42",
+    "name": "Çay Süzgeci, Huni ve Yağ Sıçratmaz Kapak",
+    "store": "Trendyol",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730710000000
+  },
+  {
+    "id": "a-43",
+    "name": "Bulaşıklık & Lavabo Yanı Tezgah Düzenleyici / Sabunluk",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730709000000
+  },
+  {
+    "id": "a-44",
+    "name": "Erzak Saklama Kapları (Bakliyat Kutuları - 12'li Modüler Set)",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730708000000
+  },
+  {
+    "id": "a-45",
+    "name": "Buzdolabı İçi Düzenleyici Organizer & Yumurtalık",
+    "store": "IKEA",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730707000000
+  },
+  {
+    "id": "a-46",
+    "name": "Baharat Etiketleri & Çekmece İçi Ayırıcı Plakalar",
+    "store": "Trendyol",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730706000000
+  },
+  {
+    "id": "a-47",
+    "name": "Tepsi Takımı (Ahşap & Aynalı / Metal Çay-Kahve Servis Tepsileri)",
+    "store": "English Home",
+    "category": "Mutfak",
+    "inDowry": false,
+    "updatedAt": 1730705000000
+  },
+  {
+    "id": "a-48",
+    "name": "Misafir Nevresim Takımı & Çift Kişilik Misafir Yorgan/Yastık Seti",
+    "store": "Yataş",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730704000000
+  },
+  {
+    "id": "a-49",
+    "name": "Battaniye (Çift Kişilik TV/Koltuk Battaniyesi & Peluş/Vizon Yatak Battaniyesi)",
+    "store": "English Home",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730703000000
+  },
+  {
+    "id": "a-50",
+    "name": "Lastikli Çarşaf Seti (Fitted Çarşaf - Yedek Çift Kişilik 2 Adet)",
+    "store": "Madame Coco",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730702000000
+  },
+  {
+    "id": "a-51",
+    "name": "Kıyafet Askısı Seti (Ahşap / Kadife Kaydırmaz - 50 Adet)",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730701000000
+  },
+  {
+    "id": "a-52",
+    "name": "Hurç Seti (Vakumlu Hurçlar & Baza İçi Kumaş Hurç Takımı)",
+    "store": "IKEA",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730700000000
+  },
+  {
+    "id": "a-53",
+    "name": "Masa Örtüsü, Runner, Peçete ve Peçete Halkası Seti",
+    "store": "English Home",
+    "category": "Tekstil",
+    "inDowry": false,
+    "updatedAt": 1730699000000
+  },
+  {
+    "id": "a-54",
+    "name": "Tezgah Üstü Sıvı Sabunluk, Katı Sabunluk ve Diş Fırçalık Seti",
+    "store": "English Home",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730698000000
+  },
+  {
+    "id": "a-55",
+    "name": "Misafir Havlu Sepeti ve Küçük Misafir Havluları",
+    "store": "Madame Coco",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730697000000
+  },
+  {
+    "id": "a-56",
+    "name": "Duşakabin Çekeceği & Fayans/Derz Temizleme Fırçaları",
+    "store": "Trendyol",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730696000000
+  },
+  {
+    "id": "a-57",
+    "name": "Çamaşır Yıkama Filesi Seti (Hassas Çamaşırlar & Sütyen Yıkama Topu)",
+    "store": "Trendyol",
+    "category": "Banyo",
+    "inDowry": false,
+    "updatedAt": 1730695000000
+  },
+  {
+    "id": "a-58",
+    "name": "Döner Başlıklı Paspas & Kova Temizlik Seti (Mop)",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730694000000
+  },
+  {
+    "id": "a-59",
+    "name": "Toz Alma Püskülü, Mikrofiber Temizlik Bezleri ve Camsil Seti",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730693000000
+  },
+  {
+    "id": "a-60",
+    "name": "Dikiş Kutusu & Temel Dikiş-Tamir Seti (İğne, İplik, Makas, Mezura)",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730692000000
+  },
+  {
+    "id": "a-61",
+    "name": "Saç Kurutma Makinesi & Şekillendirici",
+    "store": "Philips",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730691000000
+  },
+  {
+    "id": "a-62",
+    "name": "Hassas Dijital Mutfak Terazisi",
+    "store": "Trendyol",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730690000000
+  },
+  {
+    "id": "a-63",
+    "name": "Dijital Banyo Baskülü",
+    "store": "Trendyol",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730689000000
+  },
+  {
+    "id": "a-64",
+    "name": "Tüy Toplama Rulosu & Elektrikli Tiftik Temizleyici",
+    "store": "Trendyol",
+    "category": "Elektronik",
+    "inDowry": false,
+    "updatedAt": 1730688000000
+  },
+  {
+    "id": "a-65",
+    "name": "Ev Tipi Takım Çantası (Tornavida, Pense, Çekiç, Kontrol Kalemi, Şerit Metre)",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730687000000
+  },
+  {
+    "id": "a-66",
+    "name": "Ayakkabı Çekeceği (Kerata) & Ayakkabı Bakım/Boyama Seti",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730686000000
+  },
+  {
+    "id": "a-67",
+    "name": "Giriş Kapı Önü Paspası",
+    "store": "IKEA",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730685000000
+  },
+  {
+    "id": "a-68",
+    "name": "Ütü Masası Bezi (Yedek Yanmaz Kılıf)",
+    "store": "Trendyol",
+    "category": "Diğer",
+    "inDowry": false,
+    "updatedAt": 1730684000000
+  }
+]
