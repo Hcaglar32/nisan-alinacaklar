@@ -3,1671 +3,542 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Çeyiz Takip — Kurumsal & Modern Ev Hazırlık Paneli</title>
+  <title>Çeyiz Listemiz</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Inter"', 'sans-serif'],
-          },
-          colors: {
-            sap: {
-              shell: '#1d2d3e',
-              sidebar: '#131e29',
-              sidebarHover: '#1f3142',
-              primary: '#0070f2',
-              primaryHover: '#0057be',
-              bg: '#f5f6f7',
-              card: '#ffffff',
-              border: '#e5e7eb',
-            }
-          }
+      theme: { extend: {
+        fontFamily: { sans: ['"DM Sans"', 'sans-serif'], serif: ['Fraunces', 'serif'] },
+        colors: {
+          paper: '#faf7f2', ink: '#2b2622', muted: '#7a7068', line: '#ebe5dc',
+          clay: { DEFAULT: '#c2573f', dark: '#a8452f', soft: '#f8e8e2' },
+          sage: { DEFAULT: '#4f7a5c', soft: '#e6efe8' },
+          sand: '#f1ece3'
         }
-      }
+      } }
     }
   </script>
   <style>
-    body {
-      background-color: #f5f6f7;
-      color: #1d2d3e;
-      overflow-x: hidden;
-    }
-    .sap-shadow {
-      box-shadow: 0 2px 8px rgba(29, 45, 62, 0.06), 0 0 1px rgba(29, 45, 62, 0.12);
-    }
-    .sap-shadow-hover:hover {
-      box-shadow: 0 8px 20px rgba(29, 45, 62, 0.1), 0 0 1px rgba(29, 45, 62, 0.15);
-      transform: translateY(-2px);
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      75% { transform: translateX(6px); }
-    }
-    .animate-shake {
-      animation: shake 0.3s ease-in-out;
-    }
+    body { background:#faf7f2; color:#2b2622; }
+    .row:hover .row-actions { opacity:1; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .shake { animation: shake .3s; }
+    .toast { transition: all .25s; }
   </style>
 </head>
-<body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="font-sans antialiased">
 
-  <!-- ================= AUTH / PIN EKRANI ================= -->
-  <div id="authScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#131e29]">
-    <div id="authCard" class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 sm:p-10 text-center border border-slate-200">
-      <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-[#0070f2] flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
-        <i data-lucide="layers" class="w-8 h-8"></i>
+  <!-- GİRİŞ -->
+  <div id="authScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-paper">
+    <div id="authCard" class="w-full max-w-sm bg-white rounded-3xl border border-line p-8 text-center shadow-sm">
+      <div class="w-14 h-14 mx-auto rounded-full bg-clay-soft text-clay flex items-center justify-center mb-4">
+        <i data-lucide="heart" class="w-6 h-6"></i>
       </div>
-
-      <span class="inline-block px-3 py-1 rounded-full bg-blue-50 text-[#0070f2] text-xs font-bold tracking-wide uppercase mb-2">
-        Çeyiz Yönetim Sistemi
-      </span>
-      <h1 class="text-2xl font-extrabold text-slate-900">Hoş Geldiniz</h1>
-      <p class="text-sm text-slate-500 mt-2 mb-8">Çalışma alanına erişmek için ortak PIN kodunuzu girin</p>
-
-      <form id="loginForm" class="space-y-5">
-        <div>
-          <input
-            type="password"
-            id="pinInput"
-            placeholder="••••"
-            autocomplete="current-password"
-            class="w-full px-4 py-4 text-center text-xl font-bold tracking-[0.4em] rounded-xl border-2 border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-[#0070f2] transition-all placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
-            required
-          />
-        </div>
-
-        <p id="authError" class="hidden text-xs font-semibold text-red-600 bg-red-50 py-2.5 px-3 rounded-xl border border-red-200">
-          Girdiğiniz PIN kodu hatalı. Lütfen tekrar deneyin.
-        </p>
-
-        <button
-          type="submit"
-          class="w-full py-4 px-6 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white font-bold text-sm shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2"
-        >
-          <span>Sisteme Giriş Yap</span>
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </button>
+      <h1 class="font-serif text-2xl font-bold">Çeyiz Listemiz</h1>
+      <p class="text-sm text-muted mt-1 mb-6">Devam etmek için şifreyi gir</p>
+      <form id="loginForm" class="space-y-3">
+        <input id="pinInput" type="password" required placeholder="Şifre" autocomplete="current-password"
+          class="w-full text-center text-lg tracking-widest px-4 py-3 rounded-xl border border-line bg-paper focus:outline-none focus:border-clay" />
+        <p id="authError" class="hidden text-sm text-clay">Şifre yanlış, tekrar dene.</p>
+        <button class="w-full py-3 rounded-xl bg-clay hover:bg-clay-dark text-white font-semibold transition">Giriş</button>
       </form>
-
-      <div class="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-        <span>Varsayılan PIN: <strong class="text-slate-700">2026</strong></span>
-        <span class="text-slate-400">SAP Fiori Workspace UI</span>
-      </div>
     </div>
   </div>
 
-  <!-- ================= ANA UYGULAMA (SOL MENÜ + SAYFA ALANI) ================= -->
-  <div id="appScreen" class="hidden min-h-screen flex flex-col lg:flex-row">
+  <!-- UYGULAMA -->
+  <div id="appScreen" class="hidden min-h-screen lg:flex">
 
-    <!-- Mobil Üst Bar -->
-    <div class="lg:hidden bg-[#131e29] text-white px-4 py-3.5 flex items-center justify-between sticky top-0 z-40">
-      <div class="flex items-center gap-3">
-        <button id="mobileMenuBtn" class="p-2 rounded-lg bg-white/10 hover:bg-white/20">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-[#0070f2] flex items-center justify-center font-bold">
-            <i data-lucide="layers" class="w-4 h-4"></i>
-          </div>
-          <span class="font-bold text-sm tracking-tight">Çeyiz Portalı</span>
-        </div>
-      </div>
-      <button onclick="openItemModal()" class="px-3 py-1.5 rounded-lg bg-[#0070f2] text-xs font-bold flex items-center gap-1.5">
-        <i data-lucide="plus" class="w-4 h-4"></i>
-        <span>Yeni Ürün</span>
-      </button>
+    <!-- Mobil üst bar -->
+    <div class="lg:hidden sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-line px-4 py-3 flex items-center justify-between">
+      <button id="menuBtn" class="p-2 -ml-2"><i data-lucide="menu" class="w-5 h-5"></i></button>
+      <span class="font-serif font-bold text-lg">Çeyiz Listemiz</span>
+      <button onclick="openItemModal()" class="p-2 -mr-2 text-clay"><i data-lucide="plus" class="w-5 h-5"></i></button>
     </div>
+    <div id="backdrop" class="fixed inset-0 bg-black/30 z-40 hidden lg:hidden"></div>
 
-    <!-- Mobil Karartma Arkaplanı -->
-    <div id="sidebarBackdrop" class="fixed inset-0 bg-slate-900/60 z-40 hidden lg:hidden"></div>
-
-    <!-- SOL MENÜ (SAP FIORI SIDEBAR) -->
-    <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-50 h-screen w-72 bg-[#131e29] text-slate-300 flex flex-col shrink-0 transition-transform duration-300 -translate-x-full lg:translate-x-0">
-      <!-- Logo & Başlık -->
-      <div class="px-6 py-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-[#0070f2] flex items-center justify-center text-white shadow-md">
-            <i data-lucide="layers" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h2 class="text-white font-bold text-base leading-tight">Çeyiz Portalı</h2>
-            <p class="text-[11px] text-slate-400 mt-0.5">Ev & Alışveriş Yönetimi</p>
-          </div>
-        </div>
-        <button id="closeMobileMenuBtn" class="lg:hidden p-1.5 text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <!-- Hızlı Ürün Ekle Butonu & Liste Yükle -->
-      <div class="p-5 space-y-2.5">
-        <button
-          onclick="openItemModal()"
-          class="w-full py-3.5 px-4 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white font-bold text-sm shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2"
-        >
-          <i data-lucide="plus-circle" class="w-5 h-5"></i>
-          <span>Yeni Ürün Ekle</span>
-        </button>
-        <button
-          id="sidebarSyncStarterBtn"
-          type="button"
-          class="w-full py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2"
-          title="Tüm çeyiz ve alınacaklar listesini items.json içindeki yeni ürünleri ekler, mevcut ürünlere dokunmaz"
-        >
-          <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
-          <span>items.json ile Eşitle (Yeni Ürünleri Ekle)</span>
-        </button>
-      </div>
-
-      <!-- Sayfa Navigasyonu -->
-      <div class="px-4 flex-1 overflow-y-auto space-y-6">
-        <div>
-          <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Sayfalar</p>
-          <nav class="space-y-1">
-            <button data-page="dashboard" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all bg-[#0070f2] text-white">
-              <div class="flex items-center gap-3">
-                <i data-lucide="layout-grid" class="w-5 h-5"></i>
-                <span>Genel Bakış (Özet)</span>
-              </div>
-            </button>
-
-            <button data-page="all" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all">
-              <div class="flex items-center gap-3">
-                <i data-lucide="package" class="w-5 h-5"></i>
-                <span>Tüm Ürünler</span>
-              </div>
-              <span id="navCountAll" class="px-2 py-0.5 rounded-md text-xs font-bold bg-white/10 text-slate-200">0</span>
-            </button>
-
-            <button data-page="pending" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all">
-              <div class="flex items-center gap-3">
-                <i data-lucide="shopping-cart" class="w-5 h-5 text-amber-400"></i>
-                <span>Alınacaklar Listesi</span>
-              </div>
-              <span id="navCountPending" class="px-2 py-0.5 rounded-md text-xs font-bold bg-amber-500/20 text-amber-300">0</span>
-            </button>
-
-            <button data-page="in_dowry" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all">
-              <div class="flex items-center gap-3">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i>
-                <span>Çeyizde Olanlar</span>
-              </div>
-              <span id="navCountInDowry" class="px-2 py-0.5 rounded-md text-xs font-bold bg-emerald-500/20 text-emerald-300">0</span>
-            </button>
-
-            <button data-page="stores" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all">
-              <div class="flex items-center gap-3">
-                <i data-lucide="store" class="w-5 h-5 text-sky-400"></i>
-                <span>Alınacak Yerler</span>
-              </div>
-              <span id="navCountStores" class="px-2 py-0.5 rounded-md text-xs font-bold bg-white/10 text-slate-200">0</span>
-            </button>
-          </nav>
-        </div>
-
-        <div>
-          <p class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2">Sistem</p>
-          <nav class="space-y-1">
-            <button data-page="settings" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all">
-              <div class="flex items-center gap-3">
-                <i data-lucide="settings" class="w-5 h-5"></i>
-                <span>Bulut & Ayarlar</span>
-              </div>
-            </button>
-          </nav>
+    <!-- Sol menü -->
+    <aside id="sidebar" class="fixed lg:sticky top-0 left-0 z-50 h-screen w-64 bg-white border-r border-line flex flex-col shrink-0 -translate-x-full lg:translate-x-0 transition-transform">
+      <div class="px-6 pt-7 pb-5">
+        <div class="font-serif text-xl font-bold">Çeyiz Listemiz</div>
+        <div id="syncLabel" class="mt-1 flex items-center gap-1.5 text-xs text-muted">
+          <span id="syncDot" class="w-2 h-2 rounded-full bg-amber-400"></span><span id="syncText">Bu cihazda</span>
         </div>
       </div>
 
-      <!-- Alt Durum & Çıkış -->
-      <div class="p-4 border-t border-white/10 bg-[#0f1720] space-y-3">
-        <div id="syncBadgeSidebar" class="flex items-center justify-between px-3 py-2 rounded-lg bg-white/5 text-xs">
-          <div class="flex items-center gap-2">
-            <span id="syncDot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span id="syncText" class="font-medium text-slate-300">Yerel / Senkronize</span>
-          </div>
-        </div>
-
-        <button
-          id="logoutBtn"
-          class="w-full py-2.5 px-3 rounded-lg bg-white/5 hover:bg-red-500/20 text-slate-300 hover:text-red-300 text-xs font-semibold transition-all flex items-center justify-center gap-2"
-        >
-          <i data-lucide="lock" class="w-4 h-4"></i>
-          <span>Oturumu Kilitle</span>
+      <div class="px-4">
+        <button onclick="openItemModal()" class="w-full py-2.5 rounded-xl bg-clay hover:bg-clay-dark text-white text-sm font-semibold flex items-center justify-center gap-2 transition">
+          <i data-lucide="plus" class="w-4 h-4"></i> Ürün Ekle
         </button>
+      </div>
+
+      <nav class="px-3 mt-5 space-y-1 flex-1 overflow-y-auto text-sm">
+        <button data-page="dashboard" class="nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl"><i data-lucide="home" class="w-4 h-4"></i>Genel Durum</button>
+        <button data-page="pending" class="nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl"><i data-lucide="shopping-bag" class="w-4 h-4"></i>Alınacaklar<span id="cPending" class="ml-auto text-xs text-muted">0</span></button>
+        <button data-page="in_dowry" class="nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl"><i data-lucide="check-circle-2" class="w-4 h-4"></i>Çeyizde Olanlar<span id="cDone" class="ml-auto text-xs text-muted">0</span></button>
+        <button data-page="all" class="nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl"><i data-lucide="list" class="w-4 h-4"></i>Tüm Ürünler<span id="cAll" class="ml-auto text-xs text-muted">0</span></button>
+        <button data-page="stores" class="nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl"><i data-lucide="store" class="w-4 h-4"></i>Mağazalar<span id="cStores" class="ml-auto text-xs text-muted">0</span></button>
+        <button data-page="settings" class="nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl"><i data-lucide="settings" class="w-4 h-4"></i>Ayarlar</button>
+      </nav>
+
+      <div class="p-4 border-t border-line">
+        <button id="logoutBtn" class="w-full py-2 rounded-xl text-sm text-muted hover:bg-sand flex items-center justify-center gap-2"><i data-lucide="lock" class="w-4 h-4"></i>Kilitle</button>
       </div>
     </aside>
 
-    <!-- SAĞ İÇERİK ALANI -->
-    <div class="flex-1 flex flex-col min-w-0">
+    <!-- İçerik -->
+    <main class="flex-1 min-w-0">
+      <div class="max-w-4xl mx-auto px-5 sm:px-8 py-8">
+        <header class="mb-6">
+          <h1 id="pageTitle" class="font-serif text-3xl font-bold"></h1>
+          <p id="pageSub" class="text-muted text-sm mt-1"></p>
+        </header>
 
-      <!-- Üst Sayfa Başlığı Barı (SAP Object Header) -->
-      <header class="bg-white border-b border-slate-200 px-6 sm:px-10 py-6">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <div class="flex items-center gap-2 text-xs font-semibold text-[#0070f2] uppercase tracking-wider">
-              <span>Çeyiz & Ev Hazırlığı</span>
-              <span>/</span>
-              <span id="pageBreadcrumb">Genel Bakış</span>
-            </div>
-            <h1 id="pageTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Genel Bakış</h1>
-            <p id="pageSubtitle" class="text-sm text-slate-500 mt-1">Çeyiz hazırlık durumunuzun anlık özeti ve hızlı kartlar.</p>
-          </div>
-
-          <div class="hidden sm:flex items-center gap-3">
-            <button
-              onclick="openItemModal()"
-              class="px-5 py-3 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white text-sm font-bold shadow-sm transition-all flex items-center gap-2"
-            >
-              <i data-lucide="plus" class="w-4 h-4"></i>
-              <span>Yeni Ürün Ekle</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <!-- Ana Sayfa İçerikleri -->
-      <main class="flex-1 px-6 sm:px-10 py-8 max-w-6xl w-full mx-auto">
-
-        <!-- ==================== SAYFA 1: GENEL BAKIŞ (DASHBOARD) ==================== -->
-        <div id="view-dashboard" class="space-y-8">
-
-          <!-- Büyük KPI Kartları (SAP Analytical Cards) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <!-- Kart 1: Tamamlanma Oranı -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200/80 sap-shadow flex flex-col justify-between">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Tamamlanma</span>
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#0070f2] flex items-center justify-center">
-                  <i data-lucide="pie-chart" class="w-5 h-5"></i>
-                </div>
-              </div>
-              <div class="my-4">
-                <div id="kpiPercent" class="text-4xl font-extrabold text-slate-900">%0</div>
-                <p id="kpiRatioText" class="text-xs text-slate-500 mt-1">0 / 0 ürün tamamlandı</p>
-              </div>
-              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                <div id="kpiProgressBar" class="h-full bg-[#0070f2] rounded-full transition-all duration-500" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <!-- Kart 2: Toplam Ürün -->
-            <div onclick="switchPage('all')" class="cursor-pointer bg-white rounded-2xl p-6 border border-slate-200/80 sap-shadow sap-shadow-hover transition-all flex flex-col justify-between">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Toplam Kayıt</span>
-                <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
-                  <i data-lucide="package" class="w-5 h-5"></i>
-                </div>
-              </div>
-              <div class="my-4">
-                <div id="kpiTotal" class="text-4xl font-extrabold text-slate-900">0</div>
-                <p class="text-xs text-slate-500 mt-1">Listelenen tüm çeyiz ürünleri</p>
-              </div>
-              <div class="text-xs font-bold text-[#0070f2] flex items-center gap-1">
-                <span>Tümünü Gör</span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
-            </div>
-
-            <!-- Kart 3: Çeyizde Olanlar (Alındı) -->
-            <div onclick="switchPage('in_dowry')" class="cursor-pointer bg-white rounded-2xl p-6 border border-slate-200/80 sap-shadow sap-shadow-hover transition-all flex flex-col justify-between">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Çeyizde Var</span>
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                  <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-                </div>
-              </div>
-              <div class="my-4">
-                <div id="kpiInDowry" class="text-4xl font-extrabold text-emerald-600">0</div>
-                <p class="text-xs text-slate-500 mt-1">Alınmış ve hazır ürünler</p>
-              </div>
-              <div class="text-xs font-bold text-emerald-600 flex items-center gap-1">
-                <span>Hazır Ürünleri Aç</span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
-            </div>
-
-            <!-- Kart 4: Alınacaklar (Eksikler) -->
-            <div onclick="switchPage('pending')" class="cursor-pointer bg-white rounded-2xl p-6 border border-slate-200/80 sap-shadow sap-shadow-hover transition-all flex flex-col justify-between">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Alınacaklar</span>
-                <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-                  <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                </div>
-              </div>
-              <div class="my-4">
-                <div id="kpiPending" class="text-4xl font-extrabold text-amber-600">0</div>
-                <p class="text-xs text-slate-500 mt-1">Henüz alınmamış eksikler</p>
-              </div>
-              <div class="text-xs font-bold text-amber-600 flex items-center gap-1">
-                <span>Eksik Listesini Aç</span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Kategori Bazlı Durum Kartları -->
-          <div>
-            <div class="flex items-center justify-between mb-4">
+        <!-- Genel durum -->
+        <section id="view-dashboard" class="space-y-6">
+          <div class="bg-white border border-line rounded-3xl p-6 sm:p-8">
+            <div class="flex items-end justify-between gap-4">
               <div>
-                <h2 class="text-lg font-bold text-slate-900">Kategorilere Göre İlerleme</h2>
-                <p class="text-xs text-slate-500">Bir kategori kartına tıklayarak o kategorideki ürünleri görüntüleyebilirsiniz</p>
+                <div class="text-sm text-muted">Hazırlık durumu</div>
+                <div class="mt-1 flex items-baseline gap-2"><span id="kPct" class="font-serif text-5xl font-bold">%0</span><span id="kText" class="text-sm text-muted"></span></div>
+              </div>
+              <div class="hidden sm:flex gap-6 text-center">
+                <div><div id="kDone" class="text-2xl font-bold text-sage">0</div><div class="text-xs text-muted">Çeyizde</div></div>
+                <div><div id="kPending" class="text-2xl font-bold text-clay">0</div><div class="text-xs text-muted">Alınacak</div></div>
               </div>
             </div>
-            <div id="dashboardCategoriesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              <!-- JS ile doldurulacak -->
-            </div>
+            <div class="mt-5 h-3 rounded-full bg-sand overflow-hidden"><div id="kBar" class="h-full bg-sage rounded-full transition-all duration-500" style="width:0%"></div></div>
           </div>
 
-          <!-- Son Eklenen Alınacak Ürünler -->
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <div>
-                <h2 class="text-lg font-bold text-slate-900">Sıradaki Alınacak Ürünler</h2>
-                <p class="text-xs text-slate-500">Henüz çeyizde olmayan ürünlerden hızlı bakış</p>
-              </div>
-              <button onclick="switchPage('pending')" class="text-xs font-bold text-[#0070f2] hover:underline flex items-center gap-1">
-                <span>Tüm Alınacaklar</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-              </button>
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="font-semibold">Sıradaki alınacaklar</h2>
+              <button onclick="go('pending')" class="text-sm text-clay hover:underline">Hepsini gör</button>
             </div>
-            <div id="dashboardRecentPending" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              <!-- JS ile doldurulacak -->
-            </div>
+            <div id="nextList" class="bg-white border border-line rounded-2xl divide-y divide-line"></div>
           </div>
 
-        </div>
+          <div>
+            <h2 class="font-semibold mb-3">Kategoriler</h2>
+            <div id="catGrid" class="grid sm:grid-cols-2 gap-3"></div>
+          </div>
+        </section>
 
-        <!-- ==================== SAYFA 2, 3, 4: ÜRÜN KARTLARI SAYFASI (TÜMÜ / ALINACAKLAR / ÇEYİZDEKİLER) ==================== -->
-        <div id="view-items" class="hidden space-y-6">
-
-          <!-- Filtre Barı (Temiz & Ferah) -->
-          <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 sap-shadow flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-            <!-- Arama -->
+        <!-- Liste sayfaları -->
+        <section id="view-items" class="hidden space-y-4">
+          <div class="flex flex-col sm:flex-row gap-2">
             <div class="relative flex-1">
-              <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Ürün adı veya alınacak mağaza ara..."
-                class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-sm focus:outline-none focus:border-[#0070f2] transition-all"
-              />
+              <i data-lucide="search" class="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input id="searchInput" placeholder="Ürün ara..." class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-line bg-white text-sm focus:outline-none focus:border-clay" />
             </div>
-
-            <!-- Kategori ve Mağaza Seçiciler -->
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <select
-                id="categorySelectFilter"
-                class="px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-sm font-medium text-slate-700 focus:outline-none focus:border-[#0070f2]"
-              >
-                <option value="all">Tüm Kategoriler</option>
-                <option value="Mutfak">🍽️ Mutfak</option>
-                <option value="Tekstil">🛏️ Tekstil</option>
-                <option value="Elektronik">🔌 Elektronik</option>
-                <option value="Salon & Mobilya">🛋️ Salon & Mobilya</option>
-                <option value="Banyo">🛁 Banyo</option>
-                <option value="Diğer">📦 Diğer</option>
-              </select>
-
-              <select
-                id="storeSelectFilter"
-                class="px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-sm font-medium text-slate-700 focus:outline-none focus:border-[#0070f2]"
-              >
-                <option value="all">Tüm Alınacak Yerler</option>
-              </select>
-            </div>
+            <select id="catFilter" class="px-3 py-2.5 rounded-xl border border-line bg-white text-sm focus:outline-none"></select>
+            <select id="storeFilter" class="px-3 py-2.5 rounded-xl border border-line bg-white text-sm focus:outline-none"></select>
           </div>
-
-          <!-- Ürün Kartları Grid (SAP Fiori Object Cards) -->
-          <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- JS ile doldurulacak -->
+          <div id="itemList" class="space-y-6"></div>
+          <div id="emptyItems" class="hidden text-center bg-white border border-dashed border-line rounded-2xl py-14">
+            <div class="text-muted text-sm">Burada gösterilecek ürün yok.</div>
+            <button onclick="openItemModal()" class="mt-4 px-4 py-2 rounded-xl bg-clay text-white text-sm font-semibold">Ürün Ekle</button>
           </div>
+        </section>
 
-          <!-- Boş Durum -->
-          <div id="emptyItemsState" class="hidden bg-white rounded-2xl p-12 text-center border border-slate-200/80 sap-shadow">
-            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-50 text-[#0070f2] flex items-center justify-center">
-              <i data-lucide="inbox" class="w-8 h-8"></i>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900">Bu görünümde ürün bulunamadı</h3>
-            <p class="text-sm text-slate-500 mt-1 max-w-md mx-auto">
-              Yeni bir çeyiz ürünü ekleyebilir veya filtrelerinizi temizleyebilirsiniz.
-            </p>
-            <div class="mt-6 flex items-center justify-center gap-3">
-              <button
-                onclick="openItemModal()"
-                class="px-5 py-2.5 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white text-sm font-bold transition-all inline-flex items-center gap-2"
-              >
-                <i data-lucide="plus" class="w-4 h-4"></i>
-                <span>Yeni Ürün Ekle</span>
-              </button>
-              <button
-                id="loadStarterBtn"
-                type="button"
-                class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold transition-all inline-flex items-center gap-2"
-              >
-                <i data-lucide="sparkles" class="w-4 h-4"></i>
-                <span>items.json ile Eşitle</span>
-              </button>
+        <!-- Mağazalar -->
+        <section id="view-stores" class="hidden space-y-4">
+          <form id="storeForm" class="flex gap-2">
+            <input id="newStoreInput" placeholder="Yeni mağaza / yer adı (ör. Karaca, Kapalıçarşı)" class="flex-1 px-4 py-2.5 rounded-xl border border-line bg-white text-sm focus:outline-none focus:border-clay" />
+            <button class="px-4 py-2.5 rounded-xl bg-clay hover:bg-clay-dark text-white text-sm font-semibold">Ekle</button>
+          </form>
+          <div id="storeGrid" class="grid sm:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- Ayarlar -->
+        <section id="view-settings" class="hidden space-y-4">
+          <div class="bg-white border border-line rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold">Bulut bağlantısı (Firebase)</h3>
+            <p class="text-sm text-muted">Tüm cihazların aynı listeyi görmesi için Realtime Database adresi.</p>
+            <input id="dbUrlInput" type="url" placeholder="https://proje-default-rtdb.firebaseio.com" class="w-full px-4 py-2.5 rounded-xl border border-line text-sm focus:outline-none focus:border-clay" />
+          </div>
+          <div class="bg-white border border-line rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold">Giriş şifresi</h3>
+            <input id="newPinInput" placeholder="Yeni şifre" class="w-full px-4 py-2.5 rounded-xl border border-line text-sm focus:outline-none focus:border-clay" />
+          </div>
+          <button id="saveSettingsBtn" class="px-5 py-2.5 rounded-xl bg-clay hover:bg-clay-dark text-white text-sm font-semibold">Kaydet</button>
+
+          <div class="bg-white border border-line rounded-2xl p-6 space-y-3">
+            <h3 class="font-semibold">Liste ve yedek</h3>
+            <p class="text-sm text-muted"><code>items.json</code> dosyasına yeni ürün eklediysen listeye aktar. Mevcut ürünlerin durumu değişmez.</p>
+            <div class="flex flex-wrap gap-2">
+              <button id="mergeBtn" class="px-4 py-2 rounded-xl border border-line text-sm font-medium hover:bg-sand">items.json'dan yeni ürünleri ekle</button>
+              <button id="exportBtn" class="px-4 py-2 rounded-xl border border-line text-sm font-medium hover:bg-sand">Yedeği indir</button>
             </div>
           </div>
-
-        </div>
-
-        <!-- ==================== SAYFA 5: ALINACAK YERLER (MAĞAZA KARTLARI) ==================== -->
-        <div id="view-stores" class="space-y-6 hidden">
-          <!-- Hızlı Mağaza Ekleme & Arama Üst Barı -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 sap-shadow flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold">
-                <i data-lucide="store" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h3 class="text-sm font-bold text-slate-900">Alınacak Yerler / Mağaza Listesi</h3>
-                <p class="text-xs text-slate-500">Mevcut mağazalar ve yeni dinamik mağaza/yer ekleme</p>
-              </div>
-            </div>
-
-            <!-- Yeni Mağaza Ekleme Girişi -->
-            <div class="flex items-center gap-2">
-              <div class="relative flex-1 sm:w-64">
-                <input
-                  type="text"
-                  id="newCustomStoreInput"
-                  placeholder="Yeni Alınacak Yer (örn: Paşabahçe, Trendyol)..."
-                  class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-xs sm:text-sm focus:outline-none focus:border-[#0070f2]"
-                />
-              </div>
-              <button
-                type="button"
-                id="addNewStoreBtn"
-                class="px-4 py-2.5 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white text-xs font-bold transition-all flex items-center gap-1.5 shrink-0"
-              >
-                <i data-lucide="plus" class="w-4 h-4"></i>
-                <span>Yer Ekle</span>
-              </button>
-            </div>
-          </div>
-
-          <div id="storesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- JS ile mağaza bazlı kartlar doldurulacak -->
-          </div>
-        </div>
-
-        <!-- ==================== SAYFA 6: BULUT & SİSTEM AYARLARI ==================== -->
-        <div id="view-settings" class="hidden space-y-6">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-            <!-- Firebase Bulut Kartı -->
-            <div class="bg-white rounded-2xl p-7 border border-slate-200/80 sap-shadow space-y-5">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#0070f2] flex items-center justify-center shrink-0">
-                  <i data-lucide="cloud" class="w-6 h-6"></i>
-                </div>
-                <div>
-                  <h3 class="text-base font-bold text-slate-900">Firebase Gerçek Zamanlı Bulut Bağlantısı</h3>
-                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                    Tüm telefon ve bilgisayarların aynı listeyi anlık görmesi için Firebase Realtime Database adresinizi aşağıya kaydedin.
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-                  Firebase Realtime Database URL
-                </label>
-                <input
-                  type="url"
-                  id="firebaseDbUrlInput"
-                  placeholder="https://proje-adi-default-rtdb.firebaseio.com"
-                  class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-sm focus:outline-none focus:border-[#0070f2]"
-                />
-              </div>
-
-              <div class="pt-2">
-                <button
-                  id="saveCloudSettingsBtn"
-                  type="button"
-                  class="w-full py-3.5 px-5 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2"
-                >
-                  <i data-lucide="save" class="w-4 h-4"></i>
-                  <span>Ayarları Kaydet ve Şimdi Senkronize Et</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- PIN & Yedekleme Kartı -->
-            <div class="space-y-6">
-              <div class="bg-white rounded-2xl p-7 border border-slate-200/80 sap-shadow space-y-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-                    <i data-lucide="key-round" class="w-5 h-5"></i>
-                  </div>
-                  <div>
-                    <h3 class="text-base font-bold text-slate-900">Ortak Giriş PIN Kodu</h3>
-                    <p class="text-xs text-slate-500">Uygulama açılışındaki şifreyi değiştirin</p>
-                  </div>
-                </div>
-
-                <div>
-                  <input
-                    type="text"
-                    id="newPinInput"
-                    placeholder="Örn: 2026"
-                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white text-sm font-bold focus:outline-none focus:border-[#0070f2]"
-                  />
-                </div>
-              </div>
-
-              <div class="bg-white rounded-2xl p-7 border border-slate-200/80 sap-shadow space-y-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                    <i data-lucide="database" class="w-5 h-5"></i>
-                  </div>
-                  <div>
-                    <h3 class="text-base font-bold text-slate-900">Veri Yedekleme (JSON)</h3>
-                    <p class="text-xs text-slate-500">Listenizi bilgisayarınıza indirin veya geri yükleyin</p>
-                  </div>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-3">
-                  <button id="exportJsonBtn" type="button" class="flex-1 py-3 px-4 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-bold text-slate-700 flex items-center justify-center gap-2">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>Yedeği İndir</span>
-                  </button>
-                  <label class="flex-1 py-3 px-4 rounded-xl border border-slate-200 hover:bg-slate-50 text-xs font-bold text-slate-700 flex items-center justify-center gap-2 cursor-pointer">
-                    <i data-lucide="upload" class="w-4 h-4"></i>
-                    <span>Yedek Yükle</span>
-                    <input type="file" id="importJsonInput" accept=".json" class="hidden" />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </main>
-    </div>
-  </div>
-
-  <!-- ================= YENİ ÜRÜN EKLE / DÜZENLE MODALI (SAP DIALOG) ================= -->
-  <div id="itemModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-      <div class="px-6 py-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-[#0070f2] text-white flex items-center justify-center">
-            <i data-lucide="package-plus" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 id="modalTitle" class="font-bold text-slate-900 text-base">Yeni Çeyiz Ürünü Ekle</h3>
-            <p class="text-xs text-slate-500">Ürün adını, alınacak yeri ve çeyiz durumunu girin</p>
-          </div>
-        </div>
-        <button onclick="closeItemModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+        </section>
       </div>
-
-      <form id="itemForm" class="p-6 space-y-5">
-        <input type="hidden" id="editItemId" value="" />
-
-        <!-- 1. Ürün Adı -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
-            Ürün Adı *
-          </label>
-          <input
-            type="text"
-            id="itemName"
-            required
-            placeholder="Örn: 12 Kişilik Yemek Takımı, Kahve Makinesi..."
-            class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:border-[#0070f2] focus:ring-3 focus:ring-blue-500/15"
-          />
-        </div>
-
-        <!-- 2. Alınacak Yer & Kategori -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600">
-                Alınacak Yer / Mağaza
-              </label>
-              <button
-                type="button"
-                id="quickAddStoreBtn"
-                class="text-[11px] font-bold text-[#0070f2] hover:underline flex items-center gap-1"
-                title="Yeni bir mağaza adı ekle"
-              >
-                <i data-lucide="plus" class="w-3 h-3"></i>
-                <span>Yeni Yer</span>
-              </button>
-            </div>
-            <input
-              type="text"
-              id="itemStore"
-              list="storeSuggestions"
-              placeholder="Örn: Emsan, Karaca, IKEA..."
-              class="w-full px-4 py-3.5 rounded-xl border border-slate-300 text-sm font-medium focus:outline-none focus:border-[#0070f2] focus:ring-3 focus:ring-blue-500/15"
-            />
-            <datalist id="storeSuggestions">
-              <!-- Dinamik doldurulur -->
-            </datalist>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
-              Kategori
-            </label>
-            <select
-              id="itemCategory"
-              class="w-full px-4 py-3.5 rounded-xl border border-slate-300 bg-white text-sm font-medium focus:outline-none focus:border-[#0070f2]"
-            >
-              <option value="Mutfak">🍽️ Mutfak</option>
-              <option value="Tekstil">🛏️ Tekstil</option>
-              <option value="Elektronik">🔌 Elektronik</option>
-              <option value="Salon & Mobilya">🛋️ Salon & Mobilya</option>
-              <option value="Banyo">🛁 Banyo</option>
-              <option value="Diğer">📦 Diğer</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- 3. Çeyizde Olup Olmadığı Seçimi (Net Kart Seçimi) -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
-            Çeyizde Var mı? (Durumu)
-          </label>
-          <div class="grid grid-cols-2 gap-3">
-            <label class="cursor-pointer">
-              <input type="radio" name="dowryStatusRadio" id="statusPendingRadio" value="pending" checked class="peer hidden" />
-              <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-amber-500 peer-checked:bg-amber-50/60 flex items-center gap-2.5 transition-all">
-                <i data-lucide="shopping-cart" class="w-5 h-5 text-amber-600"></i>
-                <div>
-                  <div class="text-xs font-bold text-slate-900">Alınacak</div>
-                  <div class="text-[11px] text-slate-500">Henüz çeyizde yok</div>
-                </div>
-              </div>
-            </label>
-
-            <label class="cursor-pointer">
-              <input type="radio" name="dowryStatusRadio" id="statusInDowryRadio" value="in_dowry" class="peer hidden" />
-              <div class="p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-emerald-500 peer-checked:bg-emerald-50/60 flex items-center gap-2.5 transition-all">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600"></i>
-                <div>
-                  <div class="text-xs font-bold text-slate-900">Çeyizde Var</div>
-                  <div class="text-[11px] text-slate-500">Alındı / Hazır</div>
-                </div>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-          <button
-            type="button"
-            onclick="closeItemModal()"
-            class="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-sm font-semibold transition-all"
-          >
-            Vazgeç
-          </button>
-          <button
-            type="submit"
-            class="px-6 py-2.5 rounded-xl bg-[#0070f2] hover:bg-[#0057be] text-white text-sm font-bold shadow-md shadow-blue-600/20 transition-all"
-          >
-            Kaydet
-          </button>
-        </div>
-      </form>
-    </div>
+    </main>
   </div>
 
-  <!-- ================= UYGULAMA MANTIĞI (FIREBASE MODULAR SDK) ================= -->
+  <!-- Ürün penceresi -->
+  <div id="itemModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-black/40">
+    <form id="itemForm" class="w-full max-w-md bg-white rounded-3xl p-6 space-y-4 shadow-xl">
+      <div class="flex items-center justify-between">
+        <h3 id="modalTitle" class="font-serif text-xl font-bold">Ürün Ekle</h3>
+        <button type="button" onclick="closeItemModal()" class="p-1 text-muted"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <input type="hidden" id="editId" />
+      <label class="block text-sm font-medium">Ürün adı
+        <input id="fName" required class="mt-1 w-full px-4 py-2.5 rounded-xl border border-line text-sm focus:outline-none focus:border-clay" placeholder="Örn: Yemek takımı" />
+      </label>
+      <div class="grid grid-cols-2 gap-3">
+        <label class="block text-sm font-medium">Alınacak yer
+          <input id="fStore" list="storeList" class="mt-1 w-full px-4 py-2.5 rounded-xl border border-line text-sm focus:outline-none focus:border-clay" placeholder="Mağaza" />
+          <datalist id="storeList"></datalist>
+        </label>
+        <label class="block text-sm font-medium">Kategori
+          <select id="fCat" class="mt-1 w-full px-3 py-2.5 rounded-xl border border-line bg-white text-sm focus:outline-none"></select>
+        </label>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <label class="cursor-pointer"><input type="radio" name="st" value="pending" checked class="peer hidden" />
+          <div class="text-center py-2.5 rounded-xl border border-line text-sm font-medium peer-checked:bg-clay-soft peer-checked:border-clay peer-checked:text-clay">Alınacak</div></label>
+        <label class="cursor-pointer"><input type="radio" name="st" value="done" class="peer hidden" />
+          <div class="text-center py-2.5 rounded-xl border border-line text-sm font-medium peer-checked:bg-sage-soft peer-checked:border-sage peer-checked:text-sage">Çeyizde var</div></label>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="closeItemModal()" class="px-4 py-2.5 rounded-xl text-sm text-muted hover:bg-sand">Vazgeç</button>
+        <button class="px-5 py-2.5 rounded-xl bg-clay hover:bg-clay-dark text-white text-sm font-semibold">Kaydet</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] px-4 py-2 rounded-full bg-ink text-white text-sm opacity-0 pointer-events-none"></div>
+
   <script type="module">
-    import { initializeApp, deleteApp, getApps } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import {
-      getDatabase,
-      ref,
-      onValue,
-      update,
-      remove,
-      onChildAdded,
-      onChildChanged,
-      onChildRemoved,
-      get
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+    import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getDatabase, ref, onValue, update, remove, get, query, limitToFirst,
+             onChildAdded, onChildChanged, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-    const DEFAULT_FIREBASE_DB_URL = "";
-    const DEFAULT_SHARED_PIN = "2026";
+    /* ====== AYAR: Firebase Realtime Database adresini buraya yaz ======
+       Boş bırakırsan her cihaz kendi adresini Ayarlar'dan girmek zorunda kalır. */
+    const DEFAULT_DB_URL = "";
+    const DEFAULT_PIN = "2026";
 
-    const STORAGE_KEYS = {
-      AUTH_UNLOCKED: "ceyiz_auth_unlocked_v1",
-      PIN: "ceyiz_shared_pin_v1",
-      FIREBASE_URL: "ceyiz_firebase_db_url_v1",
-      LOCAL_ITEMS: "ceyiz_items_cache_v2",
-      CUSTOM_STORES: "ceyiz_custom_stores_v1"
-    };
+    const K = { AUTH: "ceyiz_auth", PIN: "ceyiz_pin", URL: "ceyiz_db_url", ITEMS: "ceyiz_items_v3", STORES: "ceyiz_stores_v2" };
+    const CATS = ["Mutfak", "Tekstil", "Elektronik", "Banyo", "Salon & Mobilya", "Diğer"];
 
-    const CATEGORIES = [
-      { id: "Mutfak", emoji: "🍽️", color: "bg-orange-50 text-orange-700 border-orange-200" },
-      { id: "Tekstil", emoji: "🛏️", color: "bg-purple-50 text-purple-700 border-purple-200" },
-      { id: "Elektronik", emoji: "🔌", color: "bg-blue-50 text-blue-700 border-blue-200" },
-      { id: "Salon & Mobilya", emoji: "🛋️", color: "bg-amber-50 text-amber-700 border-amber-200" },
-      { id: "Banyo", emoji: "🛁", color: "bg-cyan-50 text-cyan-700 border-cyan-200" },
-      { id: "Diğer", emoji: "📦", color: "bg-slate-100 text-slate-700 border-slate-200" }
-    ];
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const tr = s => String(s ?? "").toLocaleLowerCase("tr-TR");
 
-    // Ürün verileri artık items.json dosyasından okunur (HTML içinde tutulmaz)
-    let STARTER_ITEMS = [];
-    async function loadStarterItems() {
-      try {
-        const res = await fetch("items.json?v=" + Date.now(), { cache: "no-store" });
-        if (!res.ok) throw new Error("items.json okunamadı");
-        const data = await res.json();
-        STARTER_ITEMS = Array.isArray(data) ? data : (data.items || []);
-      } catch (err) {
-        console.warn("items.json yüklenemedi:", err);
-        STARTER_ITEMS = [];
-      }
-      return STARTER_ITEMS;
-    }
-
-    // Bellek içi ürün haritası (onChildAdded / onChildChanged / onChildRemoved ile tekil güncellenir)
     let itemsMap = new Map();
     let items = [];
-    let customStores = ["Emsan", "Karaca", "Shark", "Ninja", "Yerel Firma", "IKEA", "Madame Coco", "English Home", "Paşabahçe", "Trendyol", "Philips", "Tefal", "Yataş"];
-    let currentPage = "dashboard"; // 'dashboard' | 'all' | 'pending' | 'in_dowry' | 'stores' | 'settings'
-    let categoryFilter = "all";
-    let storeFilterValue = "all";
-    let searchQuery = "";
+    let stores = [];
+    let starter = [];
+    let page = "dashboard", fCat = "all", fStore = "all", q = "";
+    let app = null, db = null, unsubs = [];
 
-    // Firebase Realtime Database referansları ve dinleyici temizleyicileri
-    let firebaseApp = null;
-    let db = null;
-    let activeUnsubscribers = [];
-
-    function getFirebaseUrl() {
-      const saved = localStorage.getItem(STORAGE_KEYS.FIREBASE_URL);
-      const raw = (saved !== null && saved.trim() !== "") ? saved.trim() : DEFAULT_FIREBASE_DB_URL.trim();
-      return raw ? raw.replace(/\/+$/, "") : "";
-    }
-
-    function getExpectedPin() {
-      return localStorage.getItem(STORAGE_KEYS.PIN) || DEFAULT_SHARED_PIN;
-    }
-
-    function setSyncStatus(state, message) {
-      const dot = document.getElementById("syncDot");
-      const text = document.getElementById("syncText");
-      if (!dot || !text) return;
-
-      text.textContent = message;
-      if (state === "connected") {
-        dot.className = "w-2 h-2 rounded-full bg-emerald-400";
-      } else if (state === "syncing") {
-        dot.className = "w-2 h-2 rounded-full bg-sky-400 animate-ping";
-      } else if (state === "error") {
-        dot.className = "w-2 h-2 rounded-full bg-red-400";
-      } else {
-        dot.className = "w-2 h-2 rounded-full bg-amber-400";
-      }
-    }
-
-    function escapeHtml(str) {
-      return String(str || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    function getCategoryMeta(catName) {
-      return CATEGORIES.find(c => c.id === catName) || CATEGORIES[CATEGORIES.length - 1];
-    }
-
-    // Mağaza listesini yükle ve datalist ile filtreleri senkronize et
-    function getStoredCustomStores() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_STORES);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-        }
-      } catch {}
-      return customStores;
-    }
-
-    function addCustomStore(storeName) {
-      const trimmed = (storeName || "").trim();
-      if (!trimmed) return;
-      const current = getStoredCustomStores();
-      if (!current.includes(trimmed)) {
-        current.push(trimmed);
-        localStorage.setItem(STORAGE_KEYS.CUSTOM_STORES, JSON.stringify(current));
-      }
-      renderAll();
-    }
-
-    // itemsMap'ten sıralı dizi üret ve yerel önbelleği güncelle
-    function syncArrayFromMapAndRender() {
-      items = Array.from(itemsMap.values()).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
-      localStorage.setItem(STORAGE_KEYS.LOCAL_ITEMS, JSON.stringify(items));
-      renderAll();
-    }
-
-    // Aktif Firebase dinleyicilerini kapat
-    async function cleanupFirebaseListeners() {
-      activeUnsubscribers.forEach(unsub => {
-        try { unsub(); } catch {}
-      });
-      activeUnsubscribers = [];
-      db = null;
-      if (firebaseApp) {
-        try { await deleteApp(firebaseApp); } catch {}
-        firebaseApp = null;
-      }
-    }
-
-    /**
-     * Firebase Bağlantısını Başlat:
-     * - onValue: Bağlantı durumu (.info/connected) ve ortak PIN değişimini gerçek zamanlı dinler.
-     * - onChildAdded, onChildChanged, onChildRemoved: Yalnızca eklenen, değişen veya silinen
-     *   ürünü dinler; tüm listeyi tekrar tekrar indirmez.
-     * - update: Yalnızca değişen alanları (delta) günceller.
-     */
-    async function initFirebaseRealtime() {
-      await cleanupFirebaseListeners();
-
-      const dbUrl = getFirebaseUrl();
-      if (!dbUrl) {
-        setSyncStatus("local", "Yerel Mod (Senkronize)");
-        return;
-      }
-
-      try {
-        setSyncStatus("syncing", "Firebase Bağlanıyor...");
-        firebaseApp = initializeApp({ databaseURL: dbUrl }, "ceyizApp-" + Date.now());
-        db = getDatabase(firebaseApp);
-
-        // 1. onValue ile canlı bağlantı durumunu (.info/connected) dinle
-        const connectedRef = ref(db, ".info/connected");
-        const unsubConnected = onValue(connectedRef, (snap) => {
-          if (snap.val() === true) {
-            setSyncStatus("connected", "Canlı Senkronize (onChild)");
-          } else {
-            setSyncStatus("syncing", "Bağlantı Bekleniyor...");
-          }
-        }, (err) => {
-          console.error("Bağlantı dinleme hatası:", err);
-          setSyncStatus("error", "Bulut Bağlantı Hatası");
-        });
-        activeUnsubscribers.push(unsubConnected);
-
-        // 2. onValue ile ortak PIN ayarını gerçek zamanlı dinle
-        const pinRef = ref(db, "ceyizConfig/pin");
-        const unsubPin = onValue(pinRef, (snap) => {
-          const remotePin = snap.val();
-          if (remotePin) {
-            localStorage.setItem(STORAGE_KEYS.PIN, String(remotePin));
-          }
-        });
-        activeUnsubscribers.push(unsubPin);
-
-        // İlk kurulum kontrolü: Bulutta hiç veri yoksa yerel verileri `update` ile tek seferde aktar
-        const itemsRootRef = ref(db, "ceyizItems");
-        const initialSnap = await get(itemsRootRef);
-        if (!initialSnap.exists() && itemsMap.size > 0) {
-          const initialUpdates = {};
-          itemsMap.forEach((item, id) => {
-            initialUpdates[`ceyizItems/${id}`] = item;
-          });
-          initialUpdates["ceyizConfig/pin"] = getExpectedPin();
-          await update(ref(db), initialUpdates);
-        } else if (initialSnap.exists()) {
-          // Bulutta eski 8 ürün varsa veya kullanıcı yeni şablonu eşitlemek isterse
-          const cloudData = initialSnap.val() || {};
-          const cloudCount = Object.keys(cloudData).length;
-          
-          // Eğer bulutta eski demo 8 ürün kalmışsa ve yeni zengin listede 35+ ürün varsa otomatik aktar
-          if (cloudCount <= 8 && itemsMap.size > 8) {
-            const syncUpdates = {};
-            itemsMap.forEach((item, id) => {
-              syncUpdates[`ceyizItems/${id}`] = item;
-            });
-            await update(ref(db), syncUpdates);
-          } else {
-            // Bulutta veri varsa yerel haritayı temizle, onChildAdded tek tek dolduracak
-            itemsMap.clear();
-          }
-        }
-
-        // 3. onChildAdded: Listeye yeni bir ürün eklendiğinde yalnızca o ürünü alır
-        const unsubAdded = onChildAdded(itemsRootRef, (snapshot) => {
-          const val = snapshot.val();
-          if (val && typeof val === "object") {
-            const item = { ...val, id: val.id || snapshot.key };
-            itemsMap.set(snapshot.key, item);
-            syncArrayFromMapAndRender();
-          }
-        });
-        activeUnsubscribers.push(unsubAdded);
-
-        // 4. onChildChanged: Bir ürünün durumu/adı/mağazası değiştiğinde yalnızca o ürünü günceller
-        const unsubChanged = onChildChanged(itemsRootRef, (snapshot) => {
-          const val = snapshot.val();
-          if (val && typeof val === "object") {
-            const item = { ...val, id: val.id || snapshot.key };
-            itemsMap.set(snapshot.key, item);
-            syncArrayFromMapAndRender();
-          }
-        });
-        activeUnsubscribers.push(unsubChanged);
-
-        // 5. onChildRemoved: Bir ürün silindiğinde yalnızca o ürünü listeden çıkarır
-        const unsubRemoved = onChildRemoved(itemsRootRef, (snapshot) => {
-          if (itemsMap.has(snapshot.key)) {
-            itemsMap.delete(snapshot.key);
-            syncArrayFromMapAndRender();
-          }
-        });
-        activeUnsubscribers.push(unsubRemoved);
-
-      } catch (err) {
-        console.error("Firebase başlatma hatası:", err);
-        setSyncStatus("error", "Bulut Kurulum Hatası");
-      }
-    }
-
-    // Yalnızca değişen alanları (partial fields) güncelleyen yardımcı fonksiyon (`update`)
-    async function updateItemFields(itemId, changedFields) {
-      const existing = itemsMap.get(itemId) || { id: itemId };
-      const merged = { ...existing, ...changedFields, id: itemId, updatedAt: Date.now() };
-      itemsMap.set(itemId, merged);
-      syncArrayFromMapAndRender();
-
-      if (!db) return;
-
-      try {
-        const itemRef = ref(db, `ceyizItems/${itemId}`);
-        // Firebase `update`: tüm listeyi göndermek yerine yalnızca değişen alanları yazar
-        await update(itemRef, { ...changedFields, id: itemId, updatedAt: merged.updatedAt });
-      } catch (err) {
-        console.error("Alan güncelleme hatası:", err);
-        setSyncStatus("error", "Güncelleme Hatası");
-      }
-    }
-
-    // Tekil ürünü silen yardımcı fonksiyon
-    async function removeSingleItem(itemId) {
-      itemsMap.delete(itemId);
-      syncArrayFromMapAndRender();
-
-      if (!db) return;
-
-      try {
-        await remove(ref(db, `ceyizItems/${itemId}`));
-      } catch (err) {
-        console.error("Silme hatası:", err);
-        setSyncStatus("error", "Silme Hatası");
-      }
-    }
-
-    // Toplu liste yükleme (Örnek liste veya JSON yedek geri yükleme için multi-path `update`)
-    async function bulkUpdateItems(newItemsArray) {
-      itemsMap.clear();
-      const multiPathUpdates = {};
-      newItemsArray.forEach(item => {
-        itemsMap.set(item.id, item);
-        multiPathUpdates[`ceyizItems/${item.id}`] = item;
-      });
-      syncArrayFromMapAndRender();
-
-      if (!db) return;
-
-      try {
-        await update(ref(db), multiPathUpdates);
-      } catch (err) {
-        console.error("Toplu güncelleme hatası:", err);
-      }
-    }
-
-    // items.json'daki ürünlerden listede OLMAYANLARI ekler (mevcut ürünlerin durumunu bozmaz)
-    async function mergeStarterItems() {
-      await loadStarterItems();
-      const missing = STARTER_ITEMS.filter(i => i && i.id && !itemsMap.has(i.id));
-      if (missing.length === 0) return 0;
-      const multi = {};
-      missing.forEach(item => {
-        itemsMap.set(item.id, item);
-        multi[`ceyizItems/${item.id}`] = item;
-      });
-      syncArrayFromMapAndRender();
-      if (db) {
-        try { await update(ref(db), multi); } catch (err) { console.error("Birleştirme hatası:", err); }
-      }
-      return missing.length;
-    }
-
-    async function loadInitialData() {
-      await loadStarterItems();
-      const cached = localStorage.getItem(STORAGE_KEYS.LOCAL_ITEMS);
-      let initialList = [];
-      if (cached) {
-        try { initialList = JSON.parse(cached); } catch { initialList = [...STARTER_ITEMS]; }
-      } else {
-        initialList = [...STARTER_ITEMS];
-        localStorage.setItem(STORAGE_KEYS.LOCAL_ITEMS, JSON.stringify(initialList));
-      }
-
-      itemsMap.clear();
-      initialList.forEach(item => {
-        if (item && item.id) itemsMap.set(item.id, item);
-      });
-      syncArrayFromMapAndRender();
-      initFirebaseRealtime();
-    }
-
-    // Sayfa Değiştirme (Sol Menü Navigasyonu)
-    window.switchPage = function(pageId, optionalCategory = null, optionalStore = null) {
-      currentPage = pageId;
-
-      if (optionalCategory !== null) {
-        categoryFilter = optionalCategory;
-        document.getElementById("categorySelectFilter").value = optionalCategory;
-      }
-      if (optionalStore !== null) {
-        storeFilterValue = optionalStore;
-      }
-
-      // Sol menü aktifliğini güncelle
-      document.querySelectorAll(".nav-btn").forEach(btn => {
-        const isActive = btn.getAttribute("data-page") === pageId;
-        if (isActive) {
-          btn.className = "nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all bg-[#0070f2] text-white shadow-sm";
-        } else {
-          btn.className = "nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-all";
-        }
-      });
-
-      // Sayfa başlıklarını güncelle
-      const pageMeta = {
-        dashboard: {
-          breadcrumb: "Genel Bakış",
-          title: "Genel Bakış",
-          subtitle: "Çeyiz hazırlık durumunuzun kart bazlı özeti ve kategori ilerlemeleri."
-        },
-        all: {
-          breadcrumb: "Tüm Ürünler",
-          title: "Tüm Çeyiz Ürünleri",
-          subtitle: "Listenizdeki tüm ürünleri kartlar halinde görüntüleyin ve yönetin."
-        },
-        pending: {
-          breadcrumb: "Alınacaklar",
-          title: "Alınacaklar Listesi (Eksikler)",
-          subtitle: "Henüz çeyize eklenmemiş, satın alınması gereken ürünler."
-        },
-        in_dowry: {
-          breadcrumb: "Çeyizde Olanlar",
-          title: "Çeyizde Hazır Olanlar",
-          subtitle: "Satın alınmış ve çeyize eklenmiş hazır ürünleriniz."
-        },
-        stores: {
-          breadcrumb: "Alınacak Yerler",
-          title: "Mağaza & Alınacak Yer Kartları",
-          subtitle: "Hangi mağazadan hangi ürünlerin alınacağını gruplanmış kartlarla takip edin."
-        },
-        settings: {
-          breadcrumb: "Sistem Ayarları",
-          title: "Bulut Senkronizasyon & Ayarlar",
-          subtitle: "Firebase bulut bağlantısı, ortak PIN şifresi ve veri yedekleme işlemleri."
-        }
-      };
-
-      const meta = pageMeta[pageId] || pageMeta.dashboard;
-      document.getElementById("pageBreadcrumb").textContent = meta.breadcrumb;
-      document.getElementById("pageTitle").textContent = meta.title;
-      document.getElementById("pageSubtitle").textContent = meta.subtitle;
-
-      // Görünümleri gizle/göster
-      document.getElementById("view-dashboard").classList.toggle("hidden", pageId !== "dashboard");
-      document.getElementById("view-items").classList.toggle("hidden", !["all", "pending", "in_dowry"].includes(pageId));
-      document.getElementById("view-stores").classList.toggle("hidden", pageId !== "stores");
-      document.getElementById("view-settings").classList.toggle("hidden", pageId !== "settings");
-
-      if (pageId === "settings") {
-        document.getElementById("firebaseDbUrlInput").value = getFirebaseUrl();
-        document.getElementById("newPinInput").value = getExpectedPin();
-      }
-
-      closeMobileMenu();
-      renderAll();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    const PAGES = {
+      dashboard: ["Genel Durum", "Çeyiz hazırlığın nasıl gidiyor, bir bakışta."],
+      pending: ["Alınacaklar", "Henüz çeyizde olmayan ürünler."],
+      in_dowry: ["Çeyizde Olanlar", "Alınmış, hazır ürünler."],
+      all: ["Tüm Ürünler", "Listedeki bütün ürünler."],
+      stores: ["Mağazalar", "Hangi ürün nereden alınacak."],
+      settings: ["Ayarlar", "Bulut, şifre ve yedek."]
     };
 
-    // Tekil Ürün Kartı HTML Şablonu (SAP Fiori Object Card)
-    function createItemCardHtml(item) {
-      const catMeta = getCategoryMeta(item.category);
-      const storeText = (item.store || "").trim() || "Mağaza Belirtilmedi";
+    /* ---------- yardımcılar ---------- */
+    function toast(msg) {
+      const t = $("toast"); t.textContent = msg;
+      t.classList.remove("opacity-0"); clearTimeout(toast.t);
+      toast.t = setTimeout(() => t.classList.add("opacity-0"), 2200);
+    }
+    const dbUrl = () => ((localStorage.getItem(K.URL) || DEFAULT_DB_URL).trim()).replace(/\/+$/, "");
+    const getPin = () => localStorage.getItem(K.PIN) || DEFAULT_PIN;
 
-      return `
-        <div class="bg-white rounded-2xl border border-slate-200/90 sap-shadow sap-shadow-hover transition-all flex flex-col justify-between overflow-hidden">
-          <!-- Üst Renk Şeridi -->
-          <div class="h-1.5 w-full ${item.inDowry ? 'bg-emerald-500' : 'bg-amber-500'}"></div>
-
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
-            <!-- Üst Etiketler & Düzenle/Sil -->
-            <div class="flex items-start justify-between gap-2">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold border ${catMeta.color}">
-                <span>${catMeta.emoji}</span>
-                <span>${escapeHtml(item.category || "Diğer")}</span>
-              </span>
-
-              <div class="flex items-center gap-1">
-                <button
-                  type="button"
-                  onclick="openItemModal('${item.id}')"
-                  class="p-2 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-all"
-                  title="Düzenle"
-                >
-                  <i data-lucide="pencil" class="w-4 h-4"></i>
-                </button>
-                <button
-                  type="button"
-                  onclick="deleteItem('${item.id}')"
-                  class="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all"
-                  title="Sil"
-                >
-                  <i data-lucide="trash-2" class="w-4 h-4"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Ürün Adı & Bilgileri -->
-            <div class="space-y-3">
-              <div>
-                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Ürün Adı</span>
-                <h3 class="text-lg font-extrabold text-slate-900 mt-0.5 leading-snug">
-                  ${escapeHtml(item.name)}
-                </h3>
-              </div>
-
-              <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                <div>
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Alınacak Yer</span>
-                  <div class="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 mt-0.5">
-                    <i data-lucide="store" class="w-4 h-4 text-[#0070f2]"></i>
-                    <span>${escapeHtml(storeText)}</span>
-                  </div>
-                </div>
-
-                <div class="text-right">
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Durumu</span>
-                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold mt-0.5 ${
-                    item.inDowry
-                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                      : "bg-amber-50 text-amber-700 border border-amber-200"
-                  }">
-                    ${item.inDowry ? "✓ Çeyizde Var" : "• Alınacak"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Alt Aksiyon Butonu (Tek Tıkla Durum Değiştir) -->
-            <div class="pt-2">
-              <button
-                type="button"
-                onclick="toggleDowryStatus('${item.id}')"
-                class="w-full py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 ${
-                  item.inDowry
-                    ? "bg-slate-100 hover:bg-amber-50 text-slate-700 hover:text-amber-700 border border-slate-200"
-                    : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
-                }"
-              >
-                <i data-lucide="${item.inDowry ? 'rotate-ccw' : 'check'}" class="w-4 h-4"></i>
-                <span>${item.inDowry ? "Alınacaklara Geri Taşı" : "Çeyize Ekle (Alındı İşaretle)"}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
+    function setSync(state, text) {
+      const c = { ok: "bg-emerald-500", wait: "bg-amber-400", err: "bg-red-500", local: "bg-slate-300" }[state];
+      $("syncDot").className = "w-2 h-2 rounded-full " + c;
+      $("syncText").textContent = text;
     }
 
-    // Tüm Görünümleri Güncelle
-    function renderAll() {
-      const total = items.length;
-      const inDowryCount = items.filter(i => i.inDowry).length;
-      const pendingCount = total - inDowryCount;
-      const percent = total > 0 ? Math.round((inDowryCount / total) * 100) : 0;
-
-      const storesMap = {};
-      items.forEach(item => {
-        const s = (item.store || "").trim() || "Belirtilmemiş";
-        if (!storesMap[s]) storesMap[s] = [];
-        storesMap[s].push(item);
+    /* Render ve önbellek yazımı tek karede toplanır (liste açılırken 77 kez çizilmez) */
+    let raf = 0, saveT = 0;
+    function schedule() {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        items = [...itemsMap.values()];
+        render();
+        clearTimeout(saveT);
+        saveT = setTimeout(() => localStorage.setItem(K.ITEMS, JSON.stringify(items)), 400);
       });
-      const storeNames = Object.keys(storesMap).sort();
+    }
 
-      // Tüm aktif ve kayıtlı mağazaların birleşimi (Dinamik Mağazalar)
-      const allDistinctStores = Array.from(new Set([
-        ...getStoredCustomStores(),
-        ...items.map(i => (i.store || "").trim()).filter(Boolean)
-      ])).sort((a, b) => a.localeCompare(b, "tr-TR"));
+    async function loadStarter() {
+      try {
+        const r = await fetch("items.json?v=" + Date.now(), { cache: "no-store" });
+        const d = await r.json();
+        starter = Array.isArray(d) ? d : (d.items || []);
+      } catch { starter = []; }
+      return starter;
+    }
 
-      // Formdaki datalist önerilerini güncelle
-      const datalist = document.getElementById("storeSuggestions");
-      if (datalist) {
-        datalist.innerHTML = allDistinctStores.map(s => `<option value="${escapeHtml(s)}"></option>`).join("");
-      }
+    /* ---------- Firebase ---------- */
+    async function stopFirebase() {
+      unsubs.forEach(u => { try { u(); } catch {} });
+      unsubs = []; db = null;
+      if (app) { try { await deleteApp(app); } catch {} app = null; }
+    }
 
-      // Sol Menü Sayaçları
-      document.getElementById("navCountAll").textContent = total;
-      document.getElementById("navCountPending").textContent = pendingCount;
-      document.getElementById("navCountInDowry").textContent = inDowryCount;
-      document.getElementById("navCountStores").textContent = storeNames.length;
+    async function startFirebase() {
+      await stopFirebase();
+      const url = dbUrl();
+      if (!url) { setSync("local", "Bu cihazda (bulut yok)"); return; }
+      try {
+        setSync("wait", "Bağlanıyor...");
+        app = initializeApp({ databaseURL: url }, "ceyiz-" + Date.now());
+        db = getDatabase(app);
 
-      // Dashboard KPI'ları
-      document.getElementById("kpiPercent").textContent = `%${percent}`;
-      document.getElementById("kpiRatioText").textContent = `${inDowryCount} / ${total} ürün çeyizde hazır`;
-      document.getElementById("kpiProgressBar").style.width = `${percent}%`;
-      document.getElementById("kpiTotal").textContent = total;
-      document.getElementById("kpiInDowry").textContent = inDowryCount;
-      document.getElementById("kpiPending").textContent = pendingCount;
+        unsubs.push(onValue(ref(db, ".info/connected"), s =>
+          s.val() ? setSync("ok", "Senkronize") : setSync("wait", "Bağlantı bekleniyor...")));
 
-      // Dashboard Kategori Kartları
-      const catGrid = document.getElementById("dashboardCategoriesGrid");
-      catGrid.innerHTML = CATEGORIES.map(cat => {
-        const catItems = items.filter(i => (i.category || "Diğer") === cat.id);
-        const catTotal = catItems.length;
-        const catDone = catItems.filter(i => i.inDowry).length;
-        const catPct = catTotal > 0 ? Math.round((catDone / catTotal) * 100) : 0;
+        // Küçük ayar düğümleri (şifre + mağaza listesi)
+        unsubs.push(onValue(ref(db, "ceyizConfig/pin"), s => { if (s.val()) localStorage.setItem(K.PIN, String(s.val())); }));
+        unsubs.push(onValue(ref(db, "ceyizConfig/stores"), s => {
+          const v = s.val();
+          if (v) { stores = Object.values(v); localStorage.setItem(K.STORES, JSON.stringify(stores)); schedule(); }
+        }));
 
-        return `
-          <div
-            onclick="switchPage('all', '${cat.id}')"
-            class="cursor-pointer bg-white rounded-2xl p-6 border border-slate-200/80 sap-shadow sap-shadow-hover transition-all space-y-4"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <span class="text-2xl">${cat.emoji}</span>
-                <div>
-                  <h3 class="font-bold text-slate-900 text-base">${escapeHtml(cat.id)}</h3>
-                  <p class="text-xs text-slate-500">${catTotal} kayıtlı ürün</p>
-                </div>
-              </div>
-              <span class="text-sm font-extrabold text-[#0070f2]">%${catPct}</span>
-            </div>
+        // Ürünler: sadece değişen kayıt iner. Başta liste bir kez, sonra yalnızca farklar gelir.
+        const root = ref(db, "ceyizItems");
+        const up = s => { const v = s.val(); if (v && typeof v === "object") { itemsMap.set(s.key, { ...v, id: s.key }); schedule(); } };
+        itemsMap.clear();
+        unsubs.push(onChildAdded(root, up));
+        unsubs.push(onChildChanged(root, up));
+        unsubs.push(onChildRemoved(root, s => { itemsMap.delete(s.key); schedule(); }));
 
-            <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-              <div class="h-full bg-[#0070f2] rounded-full" style="width: ${catPct}%"></div>
-            </div>
-
-            <div class="flex items-center justify-between text-xs pt-1">
-              <span class="text-emerald-600 font-semibold">✓ ${catDone} Çeyizde</span>
-              <span class="text-amber-600 font-semibold">• ${catTotal - catDone} Alınacak</span>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      // Dashboard Sıradaki Alınacaklar (İlk 3)
-      const recentPending = items.filter(i => !i.inDowry).slice(0, 3);
-      const recentContainer = document.getElementById("dashboardRecentPending");
-      if (recentPending.length === 0) {
-        recentContainer.innerHTML = `
-          <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200/80 sap-shadow">
-            <p class="text-sm font-bold text-emerald-600">Harika! Alınacak eksik ürün kalmadı.</p>
-          </div>
-        `;
-      } else {
-        recentContainer.innerHTML = recentPending.map(createItemCardHtml).join("");
-      }
-
-      // Mağaza Filtre Select Güncellemesi
-      const storeSelect = document.getElementById("storeSelectFilter");
-      const realStores = Array.from(new Set(items.map(i => (i.store || "").trim()).filter(Boolean))).sort();
-      storeSelect.innerHTML = `<option value="all">Tüm Alınacak Yerler (${realStores.length})</option>` +
-        realStores.map(s => `<option value="${escapeHtml(s)}">📍 ${escapeHtml(s)}</option>`).join("");
-      if (realStores.includes(storeFilterValue)) {
-        storeSelect.value = storeFilterValue;
-      } else {
-        storeFilterValue = "all";
-        storeSelect.value = "all";
-      }
-
-      // Ürünler Sayfası (all / pending / in_dowry)
-      const q = searchQuery.toLocaleLowerCase("tr-TR");
-      const filteredItems = items.filter(item => {
-        if (currentPage === "pending" && item.inDowry) return false;
-        if (currentPage === "in_dowry" && !item.inDowry) return false;
-        if (categoryFilter !== "all" && (item.category || "Diğer") !== categoryFilter) return false;
-        if (storeFilterValue !== "all" && (item.store || "").trim() !== storeFilterValue) return false;
-        if (q) {
-          const hay = `${item.name} ${item.store || ""} ${item.category || ""}`.toLocaleLowerCase("tr-TR");
-          if (!hay.includes(q)) return false;
+        // Bulut tamamen boşsa (ilk kurulum) items.json'dan bir kez doldur — ürünlerin tamamını indirmeden kontrol eder
+        const first = await get(query(root, limitToFirst(1)));
+        if (!first.exists()) {
+          await loadStarter();
+          const multi = {};
+          starter.forEach(i => multi["ceyizItems/" + i.id] = i);
+          multi["ceyizConfig/pin"] = getPin();
+          multi["ceyizConfig/stores"] = Object.fromEntries(stores.map((s, n) => ["s" + n, s]));
+          if (starter.length) await update(ref(db), multi);
         }
-        return true;
+      } catch (e) {
+        console.error(e); setSync("err", "Bulut hatası");
+      }
+    }
+
+    /* Tek kayıt, tek alan yazımı */
+    async function saveItem(id, fields) {
+      const merged = { ...(itemsMap.get(id) || {}), ...fields, id, updatedAt: Date.now() };
+      itemsMap.set(id, merged); schedule();
+      if (!db) return;
+      try { await update(ref(db, "ceyizItems/" + id), { ...fields, id, updatedAt: merged.updatedAt }); }
+      catch (e) { console.error(e); setSync("err", "Kaydedilemedi"); }
+    }
+
+    async function deleteItem(id) {
+      itemsMap.delete(id); schedule();
+      if (db) try { await remove(ref(db, "ceyizItems/" + id)); } catch (e) { console.error(e); }
+    }
+
+    async function pushStores() {
+      localStorage.setItem(K.STORES, JSON.stringify(stores));
+      if (db) try { await update(ref(db, "ceyizConfig/stores"), Object.fromEntries(stores.map((s, n) => ["s" + n, s]))); } catch {}
+    }
+
+    function addStore(name) {
+      name = (name || "").trim();
+      if (!name || stores.some(s => tr(s) === tr(name))) return false;
+      stores.push(name); pushStores(); schedule(); return true;
+    }
+
+    async function mergeStarter() {
+      await loadStarter();
+      const missing = starter.filter(i => i.id && !itemsMap.has(i.id));
+      if (!missing.length) return toast("Liste zaten güncel.");
+      const multi = {};
+      missing.forEach(i => { itemsMap.set(i.id, i); multi["ceyizItems/" + i.id] = i; });
+      schedule();
+      if (db) try { await update(ref(db), multi); } catch (e) { console.error(e); }
+      toast(missing.length + " yeni ürün eklendi.");
+    }
+
+    /* ---------- görünüm ---------- */
+    function itemRow(it) {
+      const done = !!it.inDowry;
+      return `<div class="row flex items-center gap-3 px-4 py-3">
+        <button onclick="toggle('${it.id}')" title="${done ? 'Alınacaklara geri al' : 'Çeyize ekle'}"
+          class="w-6 h-6 shrink-0 rounded-full border-2 flex items-center justify-center transition ${done ? 'bg-sage border-sage text-white' : 'border-slate-300 hover:border-sage'}">
+          ${done ? '<i data-lucide="check" class="w-3.5 h-3.5"></i>' : ''}</button>
+        <div class="min-w-0 flex-1">
+          <div class="text-sm font-medium ${done ? 'line-through text-muted' : ''}">${esc(it.name)}</div>
+          <div class="text-xs text-muted mt-0.5">${esc(it.store || "Yer belirtilmedi")} · ${esc(it.category || "Diğer")}</div>
+        </div>
+        <div class="row-actions flex gap-1 sm:opacity-0 transition">
+          <button onclick="openItemModal('${it.id}')" class="p-1.5 rounded-lg text-muted hover:bg-sand" title="Düzenle"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+          <button onclick="del('${it.id}')" class="p-1.5 rounded-lg text-muted hover:bg-clay-soft hover:text-clay" title="Sil"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+        </div></div>`;
+    }
+
+    function render() {
+      const total = items.length, done = items.filter(i => i.inDowry).length, pend = total - done;
+      const pct = total ? Math.round(done / total * 100) : 0;
+
+      const allStores = [...new Set([...stores, ...items.map(i => (i.store || "").trim()).filter(Boolean)])]
+        .sort((a, b) => a.localeCompare(b, "tr"));
+
+      $("cAll").textContent = total; $("cPending").textContent = pend; $("cDone").textContent = done; $("cStores").textContent = allStores.length;
+      $("storeList").innerHTML = allStores.map(s => `<option value="${esc(s)}">`).join("");
+
+      // nav aktif
+      document.querySelectorAll(".nav").forEach(b => {
+        const on = b.dataset.page === page;
+        b.className = "nav w-full flex items-center gap-3 px-3 py-2.5 rounded-xl " + (on ? "bg-clay-soft text-clay font-semibold" : "text-ink hover:bg-sand");
+      });
+      $("pageTitle").textContent = PAGES[page][0]; $("pageSub").textContent = PAGES[page][1];
+      ["dashboard", "items", "stores", "settings"].forEach(v => {
+        const show = v === "items" ? ["all", "pending", "in_dowry"].includes(page) : v === page;
+        $("view-" + v).classList.toggle("hidden", !show);
       });
 
-      const itemsGrid = document.getElementById("itemsGrid");
-      const emptyState = document.getElementById("emptyItemsState");
-      if (filteredItems.length === 0) {
-        itemsGrid.innerHTML = "";
-        emptyState.classList.remove("hidden");
-      } else {
-        emptyState.classList.add("hidden");
-        itemsGrid.innerHTML = filteredItems.map(createItemCardHtml).join("");
-      }
-
-      // Alınacak Yerler (Mağaza Kartları Sayfası)
-      const storesGrid = document.getElementById("storesGrid");
-      if (storeNames.length === 0) {
-        storesGrid.innerHTML = `
-          <div class="col-span-full bg-white rounded-2xl p-10 text-center border border-slate-200 sap-shadow">
-            <p class="text-sm text-slate-500">Henüz mağaza bilgisi içeren ürün eklenmemiş.</p>
-          </div>
-        `;
-      } else {
-        storesGrid.innerHTML = storeNames.map(storeName => {
-          const sItems = storesMap[storeName];
-          const sDone = sItems.filter(i => i.inDowry).length;
-          return `
-            <div class="bg-white rounded-2xl p-6 border border-slate-200/90 sap-shadow space-y-4">
-              <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-xl bg-blue-50 text-[#0070f2] flex items-center justify-center">
-                    <i data-lucide="store" class="w-5 h-5"></i>
-                  </div>
-                  <div>
-                    <h3 class="text-lg font-extrabold text-slate-900">${escapeHtml(storeName)}</h3>
-                    <p class="text-xs text-slate-500">${sItems.length} Ürün (${sDone} Çeyizde, ${sItems.length - sDone} Alınacak)</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-2.5">
-                ${sItems.map(item => `
-                  <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200/60">
-                    <div class="flex items-center gap-3 min-w-0">
-                      <button
-                        type="button"
-                        onclick="toggleDowryStatus('${item.id}')"
-                        class="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-all ${
-                          item.inDowry
-                            ? "bg-emerald-500 text-white"
-                            : "border-2 border-slate-300 bg-white hover:border-[#0070f2]"
-                        }"
-                      >
-                        ${item.inDowry ? '<i data-lucide="check" class="w-3.5 h-3.5"></i>' : ''}
-                      </button>
-                      <span class="text-sm font-semibold truncate ${item.inDowry ? 'line-through text-slate-400' : 'text-slate-800'}">
-                        ${escapeHtml(item.name)}
-                      </span>
-                    </div>
-                    <span class="text-[11px] font-bold px-2.5 py-1 rounded-md shrink-0 ${
-                      item.inDowry ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                    }">
-                      ${item.inDowry ? 'Çeyizde' : 'Alınacak'}
-                    </span>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          `;
+      if (page === "dashboard") {
+        $("kPct").textContent = "%" + pct; $("kText").textContent = `${done} / ${total} ürün hazır`;
+        $("kDone").textContent = done; $("kPending").textContent = pend; $("kBar").style.width = pct + "%";
+        const next = items.filter(i => !i.inDowry).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)).slice(0, 6);
+        $("nextList").innerHTML = next.length ? next.map(itemRow).join("") : `<div class="p-6 text-center text-sm text-sage">Her şey tamam, alınacak ürün kalmadı.</div>`;
+        $("catGrid").innerHTML = CATS.map(c => {
+          const l = items.filter(i => (i.category || "Diğer") === c); if (!l.length) return "";
+          const d = l.filter(i => i.inDowry).length, p = Math.round(d / l.length * 100);
+          return `<button onclick="goCat('${c}')" class="text-left bg-white border border-line rounded-2xl p-4 hover:border-clay transition">
+            <div class="flex justify-between text-sm"><span class="font-semibold">${esc(c)}</span><span class="text-muted">${d}/${l.length}</span></div>
+            <div class="mt-3 h-2 rounded-full bg-sand overflow-hidden"><div class="h-full bg-sage rounded-full" style="width:${p}%"></div></div></button>`;
         }).join("");
       }
 
+      if (["all", "pending", "in_dowry"].includes(page)) {
+        const cs = $("catFilter"), ss = $("storeFilter");
+        cs.innerHTML = `<option value="all">Tüm kategoriler</option>` + CATS.map(c => `<option>${esc(c)}</option>`).join("");
+        ss.innerHTML = `<option value="all">Tüm yerler</option>` + allStores.map(s => `<option>${esc(s)}</option>`).join("");
+        cs.value = fCat; if (!allStores.includes(fStore)) fStore = "all"; ss.value = fStore;
+
+        const list = items.filter(i =>
+          (page !== "pending" || !i.inDowry) && (page !== "in_dowry" || i.inDowry) &&
+          (fCat === "all" || (i.category || "Diğer") === fCat) &&
+          (fStore === "all" || (i.store || "").trim() === fStore) &&
+          (!q || tr(i.name + " " + (i.store || "")).includes(q)));
+
+        $("emptyItems").classList.toggle("hidden", list.length > 0);
+        $("itemList").innerHTML = CATS.map(c => {
+          const g = list.filter(i => (i.category || "Diğer") === c).sort((a, b) => a.name.localeCompare(b.name, "tr"));
+          return g.length ? `<div><h3 class="text-xs font-semibold uppercase tracking-wider text-muted mb-2 px-1">${esc(c)} · ${g.length}</h3>
+            <div class="bg-white border border-line rounded-2xl divide-y divide-line">${g.map(itemRow).join("")}</div></div>` : "";
+        }).join("");
+      }
+
+      if (page === "stores") {
+        $("storeGrid").innerHTML = allStores.map(s => {
+          const l = items.filter(i => (i.store || "").trim() === s); const d = l.filter(i => i.inDowry).length;
+          return `<div class="bg-white border border-line rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 flex justify-between items-center border-b border-line"><span class="font-semibold">${esc(s)}</span><span class="text-xs text-muted">${l.length - d} alınacak</span></div>
+            ${l.length ? `<div class="divide-y divide-line">${l.map(itemRow).join("")}</div>` : `<div class="p-4 text-sm text-muted">Bu mağazaya ürün atanmadı.</div>`}</div>`;
+        }).join("") || `<div class="text-sm text-muted">Henüz mağaza yok.</div>`;
+      }
+
       lucide.createIcons();
     }
 
-    // Ürün Ekleme / Düzenleme Modalı Aç-Kapat
-    window.openItemModal = function(editId = null) {
-      const modal = document.getElementById("itemModal");
-      const form = document.getElementById("itemForm");
-      form.reset();
+    /* ---------- etkileşim ---------- */
+    window.go = p => { page = p; if (p !== "all") { } closeMenu(); render(); scrollTo({ top: 0 }); };
+    window.goCat = c => { fCat = c; fStore = "all"; q = ""; $("searchInput").value = ""; go("all"); };
+    window.toggle = id => { const it = itemsMap.get(id); if (it) saveItem(id, { inDowry: !it.inDowry }); };
+    window.del = id => { const it = itemsMap.get(id); if (it && confirm(`"${it.name}" silinsin mi?`)) deleteItem(id); };
 
-      if (editId) {
-        const target = items.find(i => i.id === editId);
-        if (!target) return;
-        document.getElementById("modalTitle").textContent = "Çeyiz Ürününü Düzenle";
-        document.getElementById("editItemId").value = target.id;
-        document.getElementById("itemName").value = target.name;
-        document.getElementById("itemStore").value = target.store || "";
-        document.getElementById("itemCategory").value = target.category || "Mutfak";
-        if (target.inDowry) {
-          document.getElementById("statusInDowryRadio").checked = true;
-        } else {
-          document.getElementById("statusPendingRadio").checked = true;
-        }
-      } else {
-        document.getElementById("modalTitle").textContent = "Yeni Çeyiz Ürünü Ekle";
-        document.getElementById("editItemId").value = "";
-        document.getElementById("statusPendingRadio").checked = true;
-      }
-
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
-      setTimeout(() => document.getElementById("itemName").focus(), 50);
+    window.openItemModal = (id = null) => {
+      $("fCat").innerHTML = CATS.map(c => `<option>${esc(c)}</option>`).join("");
+      const it = id ? itemsMap.get(id) : null;
+      $("modalTitle").textContent = it ? "Ürünü Düzenle" : "Ürün Ekle";
+      $("editId").value = it ? it.id : "";
+      $("fName").value = it ? it.name : ""; $("fStore").value = it ? (it.store || "") : "";
+      $("fCat").value = it ? (it.category || "Diğer") : "Mutfak";
+      document.querySelector(`input[name=st][value=${it && it.inDowry ? "done" : "pending"}]`).checked = true;
+      $("itemModal").classList.replace("hidden", "flex"); setTimeout(() => $("fName").focus(), 30);
     };
+    window.closeItemModal = () => $("itemModal").classList.replace("flex", "hidden");
 
-    window.closeItemModal = function() {
-      const modal = document.getElementById("itemModal");
-      modal.classList.add("hidden");
-      modal.classList.remove("flex");
-    };
+    const openMenu = () => { $("sidebar").classList.remove("-translate-x-full"); $("backdrop").classList.remove("hidden"); };
+    function closeMenu() { $("sidebar").classList.add("-translate-x-full"); $("backdrop").classList.add("hidden"); }
 
-    // Çeyiz Durumu Değiştir — `update` ile yalnızca `inDowry` ve `updatedAt` alanlarını günceller
-    window.toggleDowryStatus = function(id) {
-      const target = itemsMap.get(id);
-      if (!target) return;
-      updateItemFields(id, { inDowry: !target.inDowry });
-    };
-
-    // Ürün Sil — Yalnızca ilgili düğümü siler (`onChildRemoved` tetiklenir)
-    window.deleteItem = function(id) {
-      const target = itemsMap.get(id);
-      if (!target) return;
-      if (!confirm(`"${target.name}" ürününü silmek istediğinize emin misiniz?`)) return;
-      removeSingleItem(id);
-    };
-
-    // Mobil Menü Kontrolleri
-    function openMobileMenu() {
-      document.getElementById("sidebar").classList.remove("-translate-x-full");
-      document.getElementById("sidebarBackdrop").classList.remove("hidden");
+    async function unlock() {
+      $("authScreen").classList.add("hidden"); $("appScreen").classList.remove("hidden");
+      let cached = [];
+      try { cached = JSON.parse(localStorage.getItem(K.ITEMS) || "[]"); } catch {}
+      cached.forEach(i => i && i.id && itemsMap.set(i.id, i));
+      try { stores = JSON.parse(localStorage.getItem(K.STORES) || "[]"); } catch { stores = []; }
+      if (!stores.length) stores = ["Karaca", "Emsan", "IKEA", "Madame Coco", "English Home", "Paşabahçe", "Trendyol", "Yataş"];
+      schedule();
+      if (!dbUrl() && !itemsMap.size) { await mergeStarter(); }   // bulutsuz ilk açılış
+      startFirebase();
     }
 
-    function closeMobileMenu() {
-      document.getElementById("sidebar").classList.add("-translate-x-full");
-      document.getElementById("sidebarBackdrop").classList.add("hidden");
-    }
-
-    // Event Listeners
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
+      document.querySelectorAll(".nav").forEach(b => b.onclick = () => { fCat = "all"; fStore = "all"; go(b.dataset.page); });
+      $("menuBtn").onclick = openMenu; $("backdrop").onclick = closeMenu;
+      $("searchInput").oninput = e => { q = tr(e.target.value); render(); };
+      $("catFilter").onchange = e => { fCat = e.target.value; render(); };
+      $("storeFilter").onchange = e => { fStore = e.target.value; render(); };
 
-      if (sessionStorage.getItem(STORAGE_KEYS.AUTH_UNLOCKED) === "true") {
-        unlockApp();
-      } else {
-        // Kilit ekranındayken de bulut PIN değişimini onValue ile dinle
-        initFirebaseRealtime();
-      }
-
-      // Giriş Formu
-      document.getElementById("loginForm").addEventListener("submit", (e) => {
+      $("loginForm").onsubmit = e => {
         e.preventDefault();
-        const entered = document.getElementById("pinInput").value.trim();
-        if (entered === getExpectedPin()) {
-          sessionStorage.setItem(STORAGE_KEYS.AUTH_UNLOCKED, "true");
-          document.getElementById("authError").classList.add("hidden");
-          unlockApp();
-        } else {
-          const errEl = document.getElementById("authError");
-          const card = document.getElementById("authCard");
-          errEl.classList.remove("hidden");
-          card.classList.remove("animate-shake");
-          void card.offsetWidth;
-          card.classList.add("animate-shake");
-        }
-      });
+        if ($("pinInput").value.trim() === getPin()) { sessionStorage.setItem(K.AUTH, "1"); unlock(); }
+        else { $("authError").classList.remove("hidden"); const c = $("authCard"); c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake"); }
+      };
+      $("logoutBtn").onclick = () => { sessionStorage.removeItem(K.AUTH); location.reload(); };
 
-      // Çıkış
-      document.getElementById("logoutBtn").addEventListener("click", () => {
-        sessionStorage.removeItem(STORAGE_KEYS.AUTH_UNLOCKED);
-        document.getElementById("pinInput").value = "";
-        document.getElementById("appScreen").classList.add("hidden");
-        document.getElementById("authScreen").classList.remove("hidden");
-      });
-
-      // Sol Menü Tıklamaları
-      document.querySelectorAll(".nav-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const targetPage = btn.getAttribute("data-page");
-          categoryFilter = "all";
-          storeFilterValue = "all";
-          document.getElementById("categorySelectFilter").value = "all";
-          switchPage(targetPage);
-        });
-      });
-
-      // Mobil Menü
-      document.getElementById("mobileMenuBtn").addEventListener("click", openMobileMenu);
-      document.getElementById("closeMobileMenuBtn").addEventListener("click", closeMobileMenu);
-      document.getElementById("sidebarBackdrop").addEventListener("click", closeMobileMenu);
-
-      // Ürün Kaydetme — Yalnızca eklenen veya değişen ürünün alanlarını `update` ile yazar
-      document.getElementById("itemForm").addEventListener("submit", (e) => {
+      $("itemForm").onsubmit = e => {
         e.preventDefault();
-        const editId = document.getElementById("editItemId").value;
-        const name = document.getElementById("itemName").value.trim();
-        const store = document.getElementById("itemStore").value.trim();
-        const category = document.getElementById("itemCategory").value;
-        const inDowry = document.getElementById("statusInDowryRadio").checked;
-
-        if (!name) return;
-
-        // Girilen mağazayı dinamik mağaza listesine de ekle
-        if (store) {
-          addCustomStore(store);
-        }
-
-        if (editId) {
-          updateItemFields(editId, { name, store, category, inDowry });
-        } else {
-          const newId = "item-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6);
-          updateItemFields(newId, { id: newId, name, store, category, inDowry });
-        }
-
-        closeItemModal();
-      });
-
-      // Dinamik Mağaza Ekleme Butonları
-      const customStoreInput = document.getElementById("newCustomStoreInput");
-      const addCustomStoreHandler = () => {
-        const val = (customStoreInput.value || "").trim();
-        if (!val) {
-          alert("Lütfen eklemek istediğiniz mağaza/yer adını yazın.");
-          return;
-        }
-        addCustomStore(val);
-        customStoreInput.value = "";
-        alert(`"${val}" mağazalar listesine başarıyla eklendi!`);
+        const name = $("fName").value.trim(); if (!name) return;
+        const store = $("fStore").value.trim();
+        const f = { name, store, category: $("fCat").value, inDowry: document.querySelector("input[name=st]:checked").value === "done" };
+        if (store) addStore(store);
+        const id = $("editId").value || "item-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+        saveItem(id, f); closeItemModal(); toast("Kaydedildi.");
       };
 
-      document.getElementById("addNewStoreBtn").addEventListener("click", addCustomStoreHandler);
-      customStoreInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          addCustomStoreHandler();
-        }
-      });
-
-      document.getElementById("quickAddStoreBtn").addEventListener("click", () => {
-        const storeName = prompt("Eklemek istediğiniz yeni mağaza / yer adını girin:");
-        if (storeName && storeName.trim()) {
-          addCustomStore(storeName.trim());
-          document.getElementById("itemStore").value = storeName.trim();
-        }
-      });
-
-      // Filtreler
-      document.getElementById("searchInput").addEventListener("input", (e) => {
-        searchQuery = e.target.value;
-        renderAll();
-      });
-
-      document.getElementById("categorySelectFilter").addEventListener("change", (e) => {
-        categoryFilter = e.target.value;
-        renderAll();
-      });
-
-      document.getElementById("storeSelectFilter").addEventListener("change", (e) => {
-        storeFilterValue = e.target.value;
-        renderAll();
-      });
-
-      const handleMerge = async () => {
-        const n = await mergeStarterItems();
-        alert(n > 0 ? `items.json'dan ${n} yeni ürün eklendi (mevcut ürünler korundu).` : "Listeniz zaten güncel, eklenecek yeni ürün yok.");
+      $("storeForm").onsubmit = e => {
+        e.preventDefault();
+        const v = $("newStoreInput").value;
+        toast(addStore(v) ? `"${v.trim()}" eklendi.` : "Bu mağaza zaten var ya da boş.");
+        $("newStoreInput").value = "";
       };
-      document.getElementById("loadStarterBtn").addEventListener("click", handleMerge);
-      const sidebarSyncBtn = document.getElementById("sidebarSyncStarterBtn");
-      if (sidebarSyncBtn) sidebarSyncBtn.addEventListener("click", handleMerge);
 
-      // Bulut & PIN Ayarları Kaydet
-      document.getElementById("saveCloudSettingsBtn").addEventListener("click", async () => {
-        const urlVal = document.getElementById("firebaseDbUrlInput").value.trim().replace(/\/+$/, "");
-        const pinVal = document.getElementById("newPinInput").value.trim() || DEFAULT_SHARED_PIN;
-
-        localStorage.setItem(STORAGE_KEYS.FIREBASE_URL, urlVal);
-        localStorage.setItem(STORAGE_KEYS.PIN, pinVal);
-
-        await initFirebaseRealtime();
-        if (db) {
-          await update(ref(db, "ceyizConfig"), { pin: pinVal, updatedAt: Date.now() });
-        }
-        alert("Ayarlarınız kaydedildi ve gerçek zamanlı Firebase dinleyicileri başlatıldı!");
-      });
-
-      // JSON Yedek İndir / Yükle
-      document.getElementById("exportJsonBtn").addEventListener("click", () => {
-        const blob = new Blob([JSON.stringify({ items, exportedAt: new Date().toISOString() }, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
+      $("saveSettingsBtn").onclick = async () => {
+        localStorage.setItem(K.URL, $("dbUrlInput").value.trim().replace(/\/+$/, ""));
+        const pin = $("newPinInput").value.trim() || DEFAULT_PIN;
+        localStorage.setItem(K.PIN, pin);
+        await startFirebase();
+        if (db) try { await update(ref(db, "ceyizConfig"), { pin }); } catch {}
+        toast("Ayarlar kaydedildi.");
+      };
+      $("mergeBtn").onclick = mergeStarter;
+      $("exportBtn").onclick = () => {
         const a = document.createElement("a");
-        a.href = url;
-        a.download = `ceyiz-yedek-${new Date().toISOString().slice(0, 10)}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-      });
+        a.href = URL.createObjectURL(new Blob([JSON.stringify(items, null, 2)], { type: "application/json" }));
+        a.download = "ceyiz-yedek-" + new Date().toISOString().slice(0, 10) + ".json"; a.click();
+      };
 
-      document.getElementById("importJsonInput").addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-          try {
-            const parsed = JSON.parse(ev.target.result);
-            if (parsed && Array.isArray(parsed.items)) {
-              bulkUpdateItems(parsed.items);
-              alert("Yedek başarıyla yüklendi!");
-            }
-          } catch {
-            alert("Dosya okunamadı.");
-          }
-        };
-        reader.readAsText(file);
-      });
+      const origGo = window.go;
+      window.go = p => { origGo(p); if (p === "settings") { $("dbUrlInput").value = dbUrl(); $("newPinInput").value = getPin(); } };
+
+      if (sessionStorage.getItem(K.AUTH) === "1") unlock();
+      else if (dbUrl()) startFirebase();   // kilit ekranındayken şifre değişimini yakalamak için
     });
-
-    function unlockApp() {
-      document.getElementById("authScreen").classList.add("hidden");
-      document.getElementById("appScreen").classList.remove("hidden");
-      loadInitialData();
-    }
   </script>
 </body>
 </html>
