@@ -219,9 +219,8 @@
     import { getDatabase, ref, onValue, update, remove, get, query, limitToFirst,
              onChildAdded, onChildChanged, onChildRemoved } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
-    /* ====== AYAR: Firebase Realtime Database adresini buraya yaz ======
-       Boş bırakırsan her cihaz kendi adresini Ayarlar'dan girmek zorunda kalır. */
-    const DEFAULT_DB_URL = "";
+    /* ====== AYAR: Firebase Realtime Database adresi ====== */
+    const DEFAULT_DB_URL = "https://nisan-8b798-default-rtdb.europe-west1.firebasedatabase.app";
     const DEFAULT_PIN = "2026";
 
     const K = { AUTH: "ceyiz_auth", PIN: "ceyiz_pin", URL: "ceyiz_db_url", ITEMS: "ceyiz_items_v3", STORES: "ceyiz_stores_v2" };
